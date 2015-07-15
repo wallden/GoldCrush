@@ -5,7 +5,8 @@ public class ClickGenerator : MonoBehaviour
 {
     private float _elapsedTime;
     private GameMaster _gameMaster;
-    private Mineral _mineral;
+    private ClickerType _clickerType;
+    private Vector3 _moveDirection;
 
     void Start ()
 	{
@@ -14,18 +15,35 @@ public class ClickGenerator : MonoBehaviour
 
 	void Update ()
 	{
-	    if (_elapsedTime > _mineral.Cooldown)
+	    if (_elapsedTime > _clickerType.Cooldown)
 	    {
-	        _gameMaster.AddCurrency(_mineral.Name);
-	        _elapsedTime = 0;
+	        AddIncome();
+	        SetNewTarget();
 	    }
 
+	    MoveToTarget();
 	    _elapsedTime += Time.deltaTime;
 	}
 
-    public void Initialize(GameMaster gameMaster, Mineral mineral)
+    private void AddIncome()
     {
-        _mineral = mineral;
+        _gameMaster.AddCurrency(_clickerType.Income);
+        _elapsedTime = 0;
+    }
+
+    private void MoveToTarget()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + _moveDirection, Time.deltaTime);
+    }
+
+    private void SetNewTarget()
+    {
+        _moveDirection = new Vector3(Random.Range(-1f, 1f), 0, 0);
+    }
+
+    public void Initialize(GameMaster gameMaster, ClickerType clickerType)
+    {
+        _clickerType = clickerType;
         _gameMaster = gameMaster;
     }
 }

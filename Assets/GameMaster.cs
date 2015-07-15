@@ -8,15 +8,19 @@ public class GameMaster : MonoBehaviour
     public GameObject CoalAutoClicker;
     public Text Text;
 
-    private Dictionary<string, Mineral> Minerals { get; set; }
+    private Dictionary<string, ClickerType> Clickers { get; set; }
     private int _currentMoney;
 
     public GameMaster()
     {
-        Minerals = new Dictionary<string, Mineral>
+        Clickers = new Dictionary<string, ClickerType>
             {
-                { "Coal", new Mineral { Name = "Coal", Cooldown = 5, Income = 5 } },
-                { "Aluminum", new Mineral { Name = "Aluminum", Cooldown = 10, Income = 10 } }
+                { "Grandma", new ClickerType { Name = "Grandma", Cooldown = 10, Income = 5 } },
+                { "Worker", new ClickerType { Name = "Worker", Cooldown = 7, Income = 10 } },
+                { "Foreman", new ClickerType { Name = "Foreman", Cooldown = 5, Income = 20 } },
+                { "Driller", new ClickerType { Name = "Driller", Cooldown = 4, Income = 40 } },
+                { "Digger", new ClickerType { Name = "Digger", Cooldown = 3, Income = 80 } },
+                { "AlienRobot", new ClickerType { Name = "AlienRobot", Cooldown = 3, Income = 80 } },
             };
     }
 
@@ -28,7 +32,7 @@ public class GameMaster : MonoBehaviour
     public void PlayerBuyAutoClicker(string type)
     {
         var clickGenerator = Instantiate(CoalAutoClicker).GetComponent<ClickGenerator>();
-        clickGenerator.Initialize(this, Minerals[type]);
+        clickGenerator.Initialize(this, Clickers[type]);
     }
 
     private void IncreaseProgressBar(Object source, ElapsedEventArgs e)
@@ -36,10 +40,9 @@ public class GameMaster : MonoBehaviour
         Debug.Log(e.SignalTime);
     }
 
-    public void AddCurrency(string type)
+    public void AddCurrency(int income)
     {
-        var mineral = Minerals[type];
-        _currentMoney += mineral.Income;
+        _currentMoney += income;
         SetCurrency();
     }
 
@@ -49,7 +52,7 @@ public class GameMaster : MonoBehaviour
     }
 }
 
-public class Mineral
+public class ClickerType
 {
     public string Name;
     public float Cooldown;
