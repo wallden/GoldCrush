@@ -1,79 +1,57 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Collections.Generic;
 using System.Timers;
+using UnityEngine;
 using UnityEngine.UI;
-using Object = System.Object;
 
 public class GameMaster : MonoBehaviour
 {
     public GameObject CoalAutoClicker;
     public Text Text;
-    public Dictionary<string,int> MineralIncomes { get; set; }
+
+    private Dictionary<string, Mineral> Minerals { get; set; }
+    private int _currentMoney;
+
     public GameMaster()
     {
-        MineralIncomes = new Dictionary<string, int>
-        {
-            {"Coal", 5},
-            {"Aluminum", 10}
-        };
+        Minerals = new Dictionary<string, Mineral>
+            {
+                { "Coal", new Mineral { Name = "Coal", Cooldown = 5, Income = 5 } },
+                { "Aluminum", new Mineral { Name = "Aluminum", Cooldown = 10, Income = 10 } }
+            };
     }
-    private int _currentMoney;
-	// Use this for initialization
-	void Start ()
-	{
-	  
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	  
-	}
+
+    public void Start()
+    {
+        SetCurrency();
+    }
 
     public void PlayerBuyAutoClicker(string type)
     {
-        switch (type)
-        {
-            case "Coal":
-                Instantiate(CoalAutoClicker);
-                break;
-        }
+        var clickGenerator = Instantiate(CoalAutoClicker).GetComponent<ClickGenerator>();
+        clickGenerator.Initialize(this, Minerals[type]);
     }
-    
 
     private void IncreaseProgressBar(Object source, ElapsedEventArgs e)
-    {        
+    {
         Debug.Log(e.SignalTime);
     }
 
     public void AddCurrency(string type)
     {
-        var amount = MineralIncomes[type];
-        _currentMoney += amount;
+        var mineral = Minerals[type];
+        _currentMoney += mineral.Income;
         SetCurrency();
     }
 
     private void SetCurrency()
     {
-        Text.text = "$" + _currentMoney.ToString();
+        Text.text = "$" + _currentMoney;
     }
 }
 
-public class MiningPick
+public class Mineral
 {
     public string Name;
     public float Cooldown;
-    public int Cost;
-
-    public MiningPick()
-    {
-        Name = "MiningPick";
-        Cooldown = 1f;
-        Cost = 25;
-    }
+    public int Income;
 }
-
-
