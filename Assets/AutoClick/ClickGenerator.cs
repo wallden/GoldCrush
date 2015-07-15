@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ClickGenerator : MonoBehaviour
 {
+    public Animator Animator;
+
     private float _elapsedTime;
     private GameMaster _gameMaster;
     private ClickerType _clickerType;
@@ -19,6 +21,7 @@ public class ClickGenerator : MonoBehaviour
 	    {
 	        AddIncome();
 	        SetNewTarget();
+            Animator.SetBool("IsMining", true);
 	    }
 
 	    MoveToTarget();

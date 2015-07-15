@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: f1e2c79b3fd75dd48afb1ece2d643f67
-timeCreated: 1436989873
+guid: 09d53836d44f4214987b2c42eeac5a20
+timeCreated: 1436999764
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: robot_spritesheet_0
-    21300002: robot_spritesheet_1
-    21300004: robot_spritesheet_2
-    21300006: robot_spritesheet_3
-    21300008: robot_spritesheet_4
-    21300010: robot_spritesheet_5
-    21300012: robot_spritesheet_6
-    21300014: robot_spritesheet_7
+    21300000: mine_spritesheet_0
+    21300002: mine_spritesheet_1
+    21300004: mine_spritesheet_2
+    21300006: mine_spritesheet_3
+    21300008: mine_spritesheet_4
+    21300010: mine_spritesheet_5
+    21300012: mine_spritesheet_6
+    21300014: mine_spritesheet_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -57,85 +57,85 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: robot_spritesheet_0
+    - name: mine_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1132
+        y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: robot_spritesheet_1
+    - name: mine_spritesheet_1
       rect:
         serializedVersion: 2
         x: 567
-        y: 1132
+        y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: robot_spritesheet_2
+    - name: mine_spritesheet_2
       rect:
         serializedVersion: 2
         x: 1134
-        y: 1132
+        y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: robot_spritesheet_3
+    - name: mine_spritesheet_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 576
+        x: 1701
+        y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: robot_spritesheet_4
+    - name: mine_spritesheet_4
       rect:
         serializedVersion: 2
-        x: 567
-        y: 576
+        x: 2268
+        y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: robot_spritesheet_5
+    - name: mine_spritesheet_5
       rect:
         serializedVersion: 2
-        x: 1134
-        y: 576
+        x: 2835
+        y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: robot_spritesheet_6
+    - name: mine_spritesheet_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 20
+        x: 3402
+        y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: robot_spritesheet_7
+    - name: mine_spritesheet_7
       rect:
         serializedVersion: 2
-        x: 567
-        y: 20
+        x: 3969
+        y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
