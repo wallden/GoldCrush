@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Timers;
+using Soomla.Store;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,6 +47,7 @@ public class GameMaster : MonoBehaviour
     {
         Initialize();
         _groundHeight = new Vector3(0, Ground.transform.localScale.y);
+        SoomlaStore.Initialize(new Store());
     }
 
     private void Initialize()
