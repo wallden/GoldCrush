@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 09d53836d44f4214987b2c42eeac5a20
-timeCreated: 1436999764
+timeCreated: 1437075211
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -60,82 +60,82 @@ TextureImporter:
     - name: mine_spritesheet_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 5
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_1
       rect:
         serializedVersion: 2
-        x: 567
+        x: 582
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_2
       rect:
         serializedVersion: 2
-        x: 1134
+        x: 1159
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_3
       rect:
         serializedVersion: 2
-        x: 1701
+        x: 1736
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_4
       rect:
         serializedVersion: 2
-        x: 2268
+        x: 2313
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_5
       rect:
         serializedVersion: 2
-        x: 2835
+        x: 2890
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_6
       rect:
         serializedVersion: 2
-        x: 3402
+        x: 3467
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_7
       rect:
         serializedVersion: 2
-        x: 3969
+        x: 4044
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

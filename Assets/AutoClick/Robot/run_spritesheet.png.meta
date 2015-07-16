@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: dc0f144b60c66eb4dbe569c4f4d9accc
-timeCreated: 1436999704
+timeCreated: 1437074978
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -76,7 +76,7 @@ TextureImporter:
     - name: run_spritesheet_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 5
         y: 5
         width: 567
         height: 556
@@ -86,7 +86,7 @@ TextureImporter:
     - name: run_spritesheet_1
       rect:
         serializedVersion: 2
-        x: 567
+        x: 582
         y: 5
         width: 567
         height: 556
@@ -96,7 +96,7 @@ TextureImporter:
     - name: run_spritesheet_2
       rect:
         serializedVersion: 2
-        x: 1134
+        x: 1159
         y: 5
         width: 567
         height: 556
@@ -106,7 +106,7 @@ TextureImporter:
     - name: run_spritesheet_3
       rect:
         serializedVersion: 2
-        x: 1701
+        x: 1736
         y: 5
         width: 567
         height: 556
@@ -116,7 +116,7 @@ TextureImporter:
     - name: run_spritesheet_4
       rect:
         serializedVersion: 2
-        x: 2268
+        x: 2313
         y: 5
         width: 567
         height: 556
@@ -126,7 +126,7 @@ TextureImporter:
     - name: run_spritesheet_5
       rect:
         serializedVersion: 2
-        x: 2835
+        x: 2890
         y: 5
         width: 567
         height: 556
@@ -136,7 +136,7 @@ TextureImporter:
     - name: run_spritesheet_6
       rect:
         serializedVersion: 2
-        x: 3402
+        x: 3467
         y: 5
         width: 567
         height: 556
@@ -146,7 +146,7 @@ TextureImporter:
     - name: run_spritesheet_7
       rect:
         serializedVersion: 2
-        x: 3969
+        x: 4044
         y: 5
         width: 567
         height: 556
