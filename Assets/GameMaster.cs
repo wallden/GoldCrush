@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Timers;
+using Soomla.Store;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +37,7 @@ public class GameMaster : MonoBehaviour
     public void Start()
     {
         Initialize();
-
+        SoomlaStore.Initialize(new Store());
     }
 
     private void Initialize()
