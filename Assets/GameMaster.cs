@@ -10,6 +10,7 @@ public class GameMaster : MonoBehaviour
     public GameObject CoalAutoClicker;
     public GameObject Ground;
     public GameObject CameraFocusPoint;
+    public Vector3 FocusPointOffset;
     public Text Text;
 
     private Dictionary<string, ClickerType> Clickers { get; set; }
@@ -46,7 +47,7 @@ public class GameMaster : MonoBehaviour
 
     private void InitializeGround()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
             GenerateGround();
         }
@@ -56,8 +57,8 @@ public class GameMaster : MonoBehaviour
     {
         var ground = Instantiate(Ground).GetComponent<Clickable>();
 
-        var groundPosition = GroundBlocks.Count > 0 ? GroundBlocks.Last().transform.position : new Vector3(0, 2, 0);
-        groundPosition.y -= 2;
+        var groundPosition = GroundBlocks.Count > 0 ? GroundBlocks.Last().transform.position : FocusPointOffset;
+        groundPosition.y -= ground.transform.localScale.y;
         ground.Initialize(this, 2, groundPosition);
         GroundBlocks.Add(ground);
     }
@@ -67,7 +68,6 @@ public class GameMaster : MonoBehaviour
         RemoveCurrency(Clickers[type].Cost);
         var clickGenerator = Instantiate(CoalAutoClicker).GetComponent<ClickGenerator>();
         clickGenerator.Initialize(this, Clickers[type]);
-
     }
 
     public void GroundDestroyed(Clickable clickable)
@@ -77,7 +77,8 @@ public class GameMaster : MonoBehaviour
         _groundsDestroyed++;
         if (_groundsDestroyed >= 3)
         {
-            CameraFocusPoint.transform.position = GroundBlocks.First().transform.position;
+            var newY = GroundBlocks.First().transform.position.y;
+            CameraFocusPoint.transform.position = CameraFocusPoint.transform.position + new Vector3(0, newY - CameraFocusPoint.transform.position.y, 0) - FocusPointOffset;
             _groundsDestroyed = 0;
         }
 
