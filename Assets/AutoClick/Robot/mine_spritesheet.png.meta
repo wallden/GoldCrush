@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 09d53836d44f4214987b2c42eeac5a20
-timeCreated: 1437075211
+timeCreated: 1437079079
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -64,8 +64,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_1
       rect:
@@ -74,8 +74,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_2
       rect:
@@ -84,8 +84,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_3
       rect:
@@ -94,8 +94,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_4
       rect:
@@ -104,8 +104,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_5
       rect:
@@ -114,8 +114,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_6
       rect:
@@ -124,8 +124,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mine_spritesheet_7
       rect:
@@ -134,8 +134,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

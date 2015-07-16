@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: dc0f144b60c66eb4dbe569c4f4d9accc
-timeCreated: 1437074978
+timeCreated: 1437079108
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -80,8 +80,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: run_spritesheet_1
       rect:
@@ -90,8 +90,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: run_spritesheet_2
       rect:
@@ -100,8 +100,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: run_spritesheet_3
       rect:
@@ -110,8 +110,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: run_spritesheet_4
       rect:
@@ -120,8 +120,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: run_spritesheet_5
       rect:
@@ -130,8 +130,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: run_spritesheet_6
       rect:
@@ -140,8 +140,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: run_spritesheet_7
       rect:
@@ -150,8 +150,8 @@ TextureImporter:
         y: 5
         width: 567
         height: 556
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

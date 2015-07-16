@@ -13,9 +13,11 @@ public class GameMaster : MonoBehaviour
     public Vector3 FocusPointOffset;
     public Text Text;
 
-    private Dictionary<string, ClickerType> Clickers { get; set; }
+    private Dictionary<string, ClickerType> Clickers { get; }
     private int _currentMoney;
     private int _groundsDestroyed;
+    private Vector3 _groundHeight;
+
     public GameMaster()
     {
         Clickers = new Dictionary<string, ClickerType>
@@ -31,12 +33,19 @@ public class GameMaster : MonoBehaviour
         GroundBlocks = new List<Clickable>();
     }
 
+    private Vector3 GroundLevel { get
+    {
+        var lastBlockPosition = GroundBlocks.Count > 0 ? GroundBlocks.Last().transform.position : FocusPointOffset;
+        return lastBlockPosition;
+    }
+    }
+
     public List<Clickable> GroundBlocks { get; set; }
 
     public void Start()
     {
         Initialize();
-
+        _groundHeight = new Vector3(0, Ground.transform.localScale.y);
     }
 
     private void Initialize()
@@ -58,8 +67,7 @@ public class GameMaster : MonoBehaviour
         var ground = Instantiate(Ground).GetComponent<Clickable>();
 
         var groundPosition = GroundBlocks.Count > 0 ? GroundBlocks.Last().transform.position : FocusPointOffset;
-        groundPosition.y -= ground.transform.localScale.y;
-        ground.Initialize(this, 2, groundPosition);
+        ground.Initialize(this, 2, groundPosition - _groundHeight);
         GroundBlocks.Add(ground);
     }
 
@@ -68,6 +76,7 @@ public class GameMaster : MonoBehaviour
         RemoveCurrency(Clickers[type].Cost);
         var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
         clickGenerator.Initialize(this, Clickers[type]);
+        clickGenerator.transform.position = FocusPointOffset;
     }
 
     public void GroundDestroyed(Clickable clickable)
