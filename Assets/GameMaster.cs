@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
 {
-    public GameObject CoalAutoClicker;
+    public GameObject AutoClickerTemplate;
     public GameObject Ground;
     public GameObject CameraFocusPoint;
     public Vector3 FocusPointOffset;
@@ -20,12 +20,12 @@ public class GameMaster : MonoBehaviour
     {
         Clickers = new Dictionary<string, ClickerType>
             {
-                { "Grandma", new ClickerType { Name = "Grandma", Cooldown = 10, Income = 2, Cost = 5} },
-                { "Worker", new ClickerType { Name = "Worker", Cooldown = 7, Income = 3, Cost = 5 } },
-                { "Foreman", new ClickerType { Name = "Foreman", Cooldown = 5, Income = 20, Cost = 5  } },
-                { "Driller", new ClickerType { Name = "Driller", Cooldown = 4, Income = 40, Cost = 5  } },
-                { "Digger", new ClickerType { Name = "Digger", Cooldown = 3, Income = 80, Cost = 5  } },
-                { "AlienRobot", new ClickerType { Name = "AlienRobot", Cooldown = 3, Income = 80, Cost = 5  } },
+                { "Grandma", new ClickerType { Name = "Grandma", Cooldown = 5, DigTime = 5, Income = 2, Cost = 5} },
+                { "Worker", new ClickerType { Name = "Worker", Cooldown = 4, DigTime = 4, Income = 3, Cost = 5 } },
+                { "Foreman", new ClickerType { Name = "Foreman", Cooldown = 3.5f, DigTime = 3.5f, Income = 20, Cost = 5  } },
+                { "Driller", new ClickerType { Name = "Driller", Cooldown = 3, DigTime = 3, Income = 40, Cost = 5  } },
+                { "Digger", new ClickerType { Name = "Digger", Cooldown = 2.5f, DigTime = 2.5f, Income = 80, Cost = 5  } },
+                { "AlienRobot", new ClickerType { Name = "AlienRobot", Cooldown = 2, DigTime = 2, Income = 80, Cost = 5  } },
             };
 
         GroundBlocks = new List<Clickable>();
@@ -66,7 +66,7 @@ public class GameMaster : MonoBehaviour
     public void PlayerBuyAutoClicker(string type)
     {
         RemoveCurrency(Clickers[type].Cost);
-        var clickGenerator = Instantiate(CoalAutoClicker).GetComponent<ClickGenerator>();
+        var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
         clickGenerator.Initialize(this, Clickers[type]);
     }
 
@@ -106,6 +106,7 @@ public class ClickerType
 {
     public string Name;
     public float Cooldown;
+    public float DigTime;
     public int Income;
     public int Cost;
 }
