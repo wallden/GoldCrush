@@ -70,15 +70,18 @@ public class GameMaster : MonoBehaviour
 
     }
 
-    public void GroundDestroyed()
+    public void GroundDestroyed(Clickable clickable)
     {
-        GenerateGround();
+        GroundBlocks.Remove(clickable);
+
         _groundsDestroyed++;
         if (_groundsDestroyed >= 3)
         {
-            CameraFocusPoint.transform.position = GroundBlocks.Last().transform.position;
+            CameraFocusPoint.transform.position = GroundBlocks.First().transform.position;
             _groundsDestroyed = 0;
         }
+
+        GenerateGround();
     }
 
     public void AddCurrency(int amount)

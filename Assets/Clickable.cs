@@ -28,7 +28,7 @@ public class Clickable : MonoBehaviour
         _hp -= amount;
         if (_hp <= 0)
         {
-            _gameMaster.GroundDestroyed();
+            _gameMaster.GroundDestroyed(this);
             
             Destroy(gameObject);
         }
