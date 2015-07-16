@@ -12,7 +12,7 @@ public class ClickGenerator : MonoBehaviour
 
     void Start ()
 	{
-	
+	    
 	}
 
 	void Update ()

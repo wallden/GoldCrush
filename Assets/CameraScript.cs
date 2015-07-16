@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ProgressBar : MonoBehaviour
+public class CameraScript : MonoBehaviour
 {
+
+    public GameObject FocusPoint;
 
     // Use this for initialization
     void Start()
@@ -11,10 +13,8 @@ public class ProgressBar : MonoBehaviour
     }
 
     // Update is called once per frame
-
     void Update()
     {
-
-
+        transform.position = FocusPoint.transform.position;
     }
 }
