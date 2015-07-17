@@ -14,6 +14,7 @@ public class GameMaster : MonoBehaviour
     public Text Text;
 
     private Dictionary<string, ClickerType> Clickers { get; set; }
+    private List<ClickGenerator> ActiveAutoclickers { get; set; }
     private int _currentMoney;
     private int _groundsDestroyed;
     private float _groundHeightOffset;
@@ -30,6 +31,7 @@ public class GameMaster : MonoBehaviour
                 { "AlienRobot", new ClickerType { Name = "AlienRobot", MoveTime = 2, DigTime = 2, Income = 80, Cost = 5  } },
             };
 
+        ActiveAutoclickers = new List<ClickGenerator>();
         GroundBlocks = new List<Clickable>();
     }
 
@@ -81,6 +83,7 @@ public class GameMaster : MonoBehaviour
         var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
         clickGenerator.Initialize(this, Clickers[type], 8);
         clickGenerator.transform.position = new Vector3(0, GroundLevel);
+        ActiveAutoclickers.Add(clickGenerator);
     }
 
     public void GroundDestroyed(Clickable clickable)
@@ -95,6 +98,7 @@ public class GameMaster : MonoBehaviour
         }
 
         GenerateGround();
+        ActiveAutoclickers.ForEach(x => x.GroundRemoved(GroundLevel));
     }
 
     public void AddCurrency(int amount)

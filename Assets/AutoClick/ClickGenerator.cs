@@ -11,19 +11,24 @@ public class ClickGenerator : MonoBehaviour
     private Vector3 _moveDirection;
     private CharacterState _characterState;
     private float _distanceToWalkEdges;
+    private float _groundLevel;
 
     enum CharacterState
     {
         Walking,
-        Mining
+        Mining,
+        Falling
     }
 
-    void Start ()
-	{
-	    
-	}
+    public void Initialize(GameMaster gameMaster, ClickerType clickerType, float distanceToWalkEdges)
+    {
+        _clickerType = clickerType;
+        _gameMaster = gameMaster;
+        _distanceToWalkEdges = distanceToWalkEdges;
+        SetNewMoveDirection();
+    }
 
-	void Update ()
+    void Update ()
 	{
 	    if (_characterState == CharacterState.Walking)
 	    {
@@ -45,8 +50,29 @@ public class ClickGenerator : MonoBehaviour
             }
         }
 
+        if (_characterState == CharacterState.Falling)
+        {
+            Fall();
+
+            if (transform.position.y <= _groundLevel)
+            {
+                EndFall();
+            }
+        }
+
 	    _elapsedTime += Time.deltaTime;
 	}
+
+    private void Fall()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(0, _groundLevel), Time.deltaTime);
+    }
+
+    private void EndFall()
+    {
+        Animator.SetBool("IsFalling", false);
+        _characterState = CharacterState.Walking;
+    }
 
     private void SetCharacterState(CharacterState newState)
     {
@@ -78,10 +104,11 @@ public class ClickGenerator : MonoBehaviour
         }
     }
 
-    public void Initialize(GameMaster gameMaster, ClickerType clickerType, float distanceToWalkEdges)
+    public void GroundRemoved(float newGroundLevel)
     {
-        _clickerType = clickerType;
-        _gameMaster = gameMaster;
-        _distanceToWalkEdges = distanceToWalkEdges;
+        _groundLevel = newGroundLevel;
+        _characterState = CharacterState.Falling;
+        Animator.SetBool("IsFalling", true);
+        //transform.position = transform.position.SetY(newGroundLevel);
     }
 }
