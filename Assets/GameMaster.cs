@@ -39,9 +39,14 @@ public class GameMaster : MonoBehaviour
     {
         get
         {
-            var lastBlockPosition = GroundBlocks.Count > 0 ? GroundBlocks.First().transform.position.y : 0;
+            var lastBlockPosition = GroundBlocks.Count > 0 ? CurrentGround.transform.position.y : 0;
             return lastBlockPosition - _groundHeightOffset;
         }
+    }
+
+    private Clickable CurrentGround
+    {
+        get { return GroundBlocks.First(); }
     }
 
     public List<Clickable> GroundBlocks { get; set; }
@@ -101,11 +106,13 @@ public class GameMaster : MonoBehaviour
         ActiveAutoclickers.ForEach(x => x.GroundRemoved(GroundLevel));
     }
 
-    public void AddCurrency(int amount)
+    public void MineCurrentGround(int amountMined)
     {
-        _currentMoney += amount;
+        _currentMoney += amountMined;
+        CurrentGround.RemoveHp(amountMined);
         SetCurrency();
     }
+
     public void RemoveCurrency(int amount)
     {
         _currentMoney -= amount;

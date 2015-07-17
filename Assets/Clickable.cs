@@ -20,7 +20,7 @@ public class Clickable : MonoBehaviour
 
     void OnMouseDown()
     {
-        _gameMaster.AddCurrency(1);
+        _gameMaster.MineCurrentGround(1);
         RemoveHp(1);
     }
     public void RemoveHp(int amount)

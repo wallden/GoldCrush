@@ -45,7 +45,7 @@ public class ClickGenerator : MonoBehaviour
             if (_elapsedTime > _clickerType.DigTime)
             {
                 SetCharacterState(CharacterState.Walking);
-                AddIncome();
+                FinishMining();
                 SetNewMoveDirection();
             }
         }
@@ -81,9 +81,9 @@ public class ClickGenerator : MonoBehaviour
         _elapsedTime = 0;
     }
 
-    private void AddIncome()
+    private void FinishMining()
     {
-        _gameMaster.AddCurrency(_clickerType.Income);
+        _gameMaster.MineCurrentGround(_clickerType.Income);
         _elapsedTime = 0;
     }
 
