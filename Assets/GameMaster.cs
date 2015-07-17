@@ -16,7 +16,7 @@ public class GameMaster : MonoBehaviour
     private Dictionary<string, ClickerType> Clickers { get; set; }
     private int _currentMoney;
     private int _groundsDestroyed;
-    private Vector3 _groundHeightOffset;
+    private float _groundHeightOffset;
 
     public GameMaster()
     {
@@ -33,12 +33,12 @@ public class GameMaster : MonoBehaviour
         GroundBlocks = new List<Clickable>();
     }
 
-    private Vector3 GroundLevel
+    private float GroundLevel
     {
         get
         {
-            var lastBlockPosition = GroundBlocks.Count > 0 ? GroundBlocks.First().transform.position : new Vector3();
-            return lastBlockPosition - FocusPointOffset + _groundHeightOffset;
+            var lastBlockPosition = GroundBlocks.Count > 0 ? GroundBlocks.First().transform.position.y : 0;
+            return lastBlockPosition - _groundHeightOffset;
         }
     }
 
@@ -46,7 +46,7 @@ public class GameMaster : MonoBehaviour
 
     public void Start()
     {
-        _groundHeightOffset = new Vector3(0, Ground.transform.localScale.y)/2;
+        _groundHeightOffset = -Ground.transform.localScale.y/2;
 
         Initialize();
         //SoomlaStore.Initialize(new Store());
@@ -60,7 +60,7 @@ public class GameMaster : MonoBehaviour
 
     private void InitializeGround()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 8; i++)
         {
             GenerateGround();
         }
@@ -71,7 +71,7 @@ public class GameMaster : MonoBehaviour
         var ground = Instantiate(Ground).GetComponent<Clickable>();
 
         var groundPosition = GroundBlocks.Count > 0 ? GroundBlocks.Last().transform.position : FocusPointOffset;
-        ground.Initialize(this, 2, groundPosition - _groundHeightOffset);
+        ground.Initialize(this, 2, groundPosition + new Vector3(0, _groundHeightOffset));
         GroundBlocks.Add(ground);
     }
 
@@ -80,7 +80,7 @@ public class GameMaster : MonoBehaviour
         RemoveCurrency(Clickers[type].Cost);
         var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
         clickGenerator.Initialize(this, Clickers[type]);
-        clickGenerator.transform.position = GroundLevel;
+        clickGenerator.transform.position = new Vector3(0, GroundLevel);
     }
 
     public void GroundDestroyed(Clickable clickable)
@@ -90,7 +90,7 @@ public class GameMaster : MonoBehaviour
         _groundsDestroyed++;
         if (_groundsDestroyed >= 3)
         {
-            CameraFocusPoint.transform.position = CameraFocusPoint.transform.position + (GroundLevel - new Vector3(0, CameraFocusPoint.transform.position.y, 0));
+            CameraFocusPoint.transform.position = CameraFocusPoint.transform.position.SetY(0) + new Vector3(0, GroundLevel) - FocusPointOffset;
             _groundsDestroyed = 0;
         }
 
