@@ -10,6 +10,7 @@ public class ClickGenerator : MonoBehaviour
     private ClickerType _clickerType;
     private Vector3 _moveDirection;
     private CharacterState _characterState;
+    private float _distanceToWalkEdges;
 
     enum CharacterState
     {
@@ -28,7 +29,7 @@ public class ClickGenerator : MonoBehaviour
 	    {
             MoveToTarget();
 
-            if (_elapsedTime > _clickerType.Cooldown)
+            if (_elapsedTime > _clickerType.MoveTime)
             {
                 SetCharacterState(CharacterState.Mining);
             }
@@ -69,12 +70,18 @@ public class ClickGenerator : MonoBehaviour
 
     private void SetNewMoveDirection()
     {
-        _moveDirection = new Vector3(Random.Range(-1f, 1f), 0, 0);
+        _moveDirection = new Vector3(Random.Range(-1f, 1f), 0, 0).normalized;
+
+        if (Mathf.Abs(_moveDirection.x*_clickerType.MoveTime + transform.position.x) > _distanceToWalkEdges)
+        {
+            _moveDirection.x = -_moveDirection.x;
+        }
     }
 
-    public void Initialize(GameMaster gameMaster, ClickerType clickerType)
+    public void Initialize(GameMaster gameMaster, ClickerType clickerType, float distanceToWalkEdges)
     {
         _clickerType = clickerType;
         _gameMaster = gameMaster;
+        _distanceToWalkEdges = distanceToWalkEdges;
     }
 }
