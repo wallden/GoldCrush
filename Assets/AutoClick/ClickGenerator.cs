@@ -13,6 +13,8 @@ public class ClickGenerator : MonoBehaviour
     private float _distanceToWalkEdges;
     private float _groundLevel;
 
+    private const float FallSpeed = 1.5f;
+
     enum CharacterState
     {
         Walking,
@@ -65,7 +67,7 @@ public class ClickGenerator : MonoBehaviour
 
     private void Fall()
     {
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(0, _groundLevel), Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(0, _groundLevel), Time.deltaTime*FallSpeed);
     }
 
     private void EndFall()
@@ -90,7 +92,7 @@ public class ClickGenerator : MonoBehaviour
 
     private void MoveToTarget()
     {
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + _moveDirection, Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + _moveDirection, Time.deltaTime*_clickerType.MoveSpeed);
         var absoluteXScale = Mathf.Abs(transform.localScale.x);
         transform.localScale = transform.localScale.SetX(_moveDirection.x >= 0 ? absoluteXScale : -absoluteXScale);
     }
@@ -99,7 +101,7 @@ public class ClickGenerator : MonoBehaviour
     {
         _moveDirection = new Vector3(Random.Range(-1f, 1f), 0, 0).normalized;
 
-        if (Mathf.Abs(_moveDirection.x*_clickerType.MoveTime + transform.position.x) > _distanceToWalkEdges)
+        if (Mathf.Abs(_moveDirection.x*_clickerType.MoveTime*_clickerType.MoveSpeed + transform.position.x) > _distanceToWalkEdges)
         {
             _moveDirection.x = -_moveDirection.x;
         }

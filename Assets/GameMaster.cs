@@ -23,12 +23,12 @@ public class GameMaster : MonoBehaviour
     {
         Clickers = new Dictionary<string, ClickerType>
             {
-                { "Grandma", new ClickerType { Name = "Grandma", MoveTime = 5, DigTime = 5, Income = 2, Cost = 5} },
-                { "Worker", new ClickerType { Name = "Worker", MoveTime = 4, DigTime = 4, Income = 3, Cost = 5 } },
-                { "Foreman", new ClickerType { Name = "Foreman", MoveTime = 3.5f, DigTime = 3.5f, Income = 20, Cost = 5  } },
-                { "Driller", new ClickerType { Name = "Driller", MoveTime = 3, DigTime = 3, Income = 40, Cost = 5  } },
-                { "Digger", new ClickerType { Name = "Digger", MoveTime = 2.5f, DigTime = 2.5f, Income = 80, Cost = 5  } },
-                { "AlienRobot", new ClickerType { Name = "AlienRobot", MoveTime = 2, DigTime = 2, Income = 80, Cost = 5  } },
+                { "Grandma", new ClickerType { Name = "Grandma", MoveTime = 5, MoveSpeed = 1, DigTime = 5, Income = 2, Cost = 5 } },
+                { "Worker", new ClickerType { Name = "Worker", MoveTime = 4, MoveSpeed = 1.2f, DigTime = 4, Income = 3, Cost = 5 } },
+                { "Foreman", new ClickerType { Name = "Foreman", MoveTime = 3.5f, MoveSpeed = 1.3f, DigTime = 3.5f, Income = 5, Cost = 5  } },
+                { "Driller", new ClickerType { Name = "Driller", MoveTime = 3, MoveSpeed = 1.4f, DigTime = 3, Income = 8, Cost = 5  } },
+                { "Digger", new ClickerType { Name = "Digger", MoveTime = 2.5f, MoveSpeed = 1.6f, DigTime = 2.5f, Income = 13, Cost = 5  } },
+                { "AlienRobot", new ClickerType { Name = "AlienRobot", MoveTime = 2, MoveSpeed = 2, DigTime = 2, Income = 21, Cost = 5  } },
             };
 
         ActiveAutoclickers = new List<ClickGenerator>();
@@ -86,7 +86,7 @@ public class GameMaster : MonoBehaviour
     {
         RemoveCurrency(Clickers[type].Cost);
         var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
-        clickGenerator.Initialize(this, Clickers[type], 8);
+        clickGenerator.Initialize(this, Clickers[type].CloneWithRandom(), 8);
         clickGenerator.transform.position = new Vector3(0, GroundLevel);
         ActiveAutoclickers.Add(clickGenerator);
     }
@@ -128,7 +128,30 @@ public class ClickerType
 {
     public string Name;
     public float MoveTime;
+    public float MoveSpeed;
     public float DigTime;
     public int Income;
     public int Cost;
+
+    private const float MaxRandomOffset = 1/5f;
+
+    public ClickerType CloneWithRandom()
+    {
+        var newWithRandom = new ClickerType
+        {
+            Name = Name,
+            MoveTime = GetWithRandomOffset(MoveTime),
+            MoveSpeed = MoveSpeed,
+            DigTime = GetWithRandomOffset(DigTime),
+            Income = Income,
+            Cost = Cost
+        };
+
+        return newWithRandom;
+    }
+
+    private float GetWithRandomOffset(float currentValue)
+    {
+        return currentValue + Random.Range(-currentValue*MaxRandomOffset, currentValue*MaxRandomOffset);
+    }
 }

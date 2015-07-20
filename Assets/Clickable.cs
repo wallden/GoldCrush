@@ -6,19 +6,14 @@ public class Clickable : MonoBehaviour
     private int _hp;
     private GameMaster _gameMaster;
 
-    // Use this for initialization
-    void Start()
+    public void Initialize(GameMaster gameMaster, int hp, Vector3 position)
     {
-        
+        _gameMaster = gameMaster;
+        _hp = hp;
+        transform.position = position;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         _gameMaster.MineCurrentGround(1);
     }
@@ -32,13 +27,5 @@ public class Clickable : MonoBehaviour
             
             Destroy(gameObject);
         }
-    }
-
-
-    public void Initialize(GameMaster gameMaster, int hp, Vector3 position)
-    {
-        _gameMaster = gameMaster;
-        _hp = hp;
-        transform.position = position;
     }
 }
