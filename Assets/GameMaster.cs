@@ -78,7 +78,7 @@ public class GameMaster : MonoBehaviour
         var ground = Instantiate(Ground).GetComponent<Clickable>();
 
         var groundPosition = GroundBlocks.Count > 0 ? GroundBlocks.Last().transform.position : FocusPointOffset;
-        ground.Initialize(this, 2, groundPosition + new Vector3(0, _groundHeightOffset));
+        ground.Initialize(this, _groundsDestroyed, groundPosition + new Vector3(0, _groundHeightOffset));
         GroundBlocks.Add(ground);
     }
 
@@ -96,10 +96,9 @@ public class GameMaster : MonoBehaviour
         GroundBlocks.Remove(clickable);
 
         _groundsDestroyed++;
-        if (_groundsDestroyed >= 3)
+        if (_groundsDestroyed % 3 == 0)
         {
             CameraFocusPoint.transform.position = CameraFocusPoint.transform.position.SetY(0) + new Vector3(0, GroundLevel) - FocusPointOffset;
-            _groundsDestroyed = 0;
         }
 
         GenerateGround();

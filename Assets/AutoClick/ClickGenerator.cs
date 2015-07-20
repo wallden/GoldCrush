@@ -71,20 +71,21 @@ public class ClickGenerator : MonoBehaviour
     private void EndFall()
     {
         Animator.SetBool("IsFalling", false);
-        _characterState = CharacterState.Walking;
+        SetCharacterState(CharacterState.Walking);
+        SetNewMoveDirection();
     }
 
     private void SetCharacterState(CharacterState newState)
     {
         _characterState = newState;
         Animator.SetBool("IsMining", _characterState == CharacterState.Mining);
+        Animator.SetBool("IsFalling", _characterState == CharacterState.Falling);
         _elapsedTime = 0;
     }
 
     private void FinishMining()
     {
         _gameMaster.MineCurrentGround(_clickerType.Income);
-        _elapsedTime = 0;
     }
 
     private void MoveToTarget()
@@ -107,8 +108,6 @@ public class ClickGenerator : MonoBehaviour
     public void GroundRemoved(float newGroundLevel)
     {
         _groundLevel = newGroundLevel;
-        _characterState = CharacterState.Falling;
-        Animator.SetBool("IsFalling", true);
-        //transform.position = transform.position.SetY(newGroundLevel);
+        SetCharacterState(CharacterState.Falling);
     }
 }

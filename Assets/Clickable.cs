@@ -21,8 +21,8 @@ public class Clickable : MonoBehaviour
     void OnMouseDown()
     {
         _gameMaster.MineCurrentGround(1);
-        RemoveHp(1);
     }
+
     public void RemoveHp(int amount)
     {
         _hp -= amount;
