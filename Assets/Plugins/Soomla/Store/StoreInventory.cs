@@ -37,11 +37,11 @@ namespace Soomla.Store
 		/// <returns>True if there are enough funds to afford the virtual item with the given item id </returns>
 		public static bool CanAfford(string itemId) {
 			SoomlaUtils.LogDebug(TAG, "Checking can afford: " + itemId);
-			
+
 			PurchasableVirtualItem pvi = (PurchasableVirtualItem) StoreInfo.GetItemByItemId(itemId);
 			return pvi.CanAfford();
 		}
-		
+
 		/// <summary>
 		/// Buys the item with the given <c>itemId</c>.
 		/// </summary>
@@ -51,7 +51,7 @@ namespace Soomla.Store
 		public static void BuyItem(string itemId) {
 			BuyItem(itemId, "");
 		}
-		
+
 		/// <summary>
 		/// Buys the item with the given <c>itemId</c>.
 		/// </summary>
@@ -78,7 +78,7 @@ namespace Soomla.Store
 			if (localItemBalances.TryGetValue(itemId, out amount)) {
 				return amount;
 			}
-			
+
 			VirtualItem item = StoreInfo.GetItemByItemId(itemId);
 			return item.GetBalance();
 		}
@@ -130,7 +130,7 @@ namespace Soomla.Store
 			SoomlaUtils.LogDebug(TAG, "Equipping: " + goodItemId);
 
 			EquippableVG good = (EquippableVG) StoreInfo.GetItemByItemId(goodItemId);
-			
+
 			try {
 				good.Equip();
 			} catch (NotEnoughGoodsException e) {
@@ -148,7 +148,7 @@ namespace Soomla.Store
 		/// <exception cref="VirtualItemNotFoundException">Thrown if the item is not found.</exception>
 		public static void UnEquipVirtualGood(string goodItemId) {
 			SoomlaUtils.LogDebug(TAG, "UnEquipping: " + goodItemId);
-			
+
 			EquippableVG good = (EquippableVG) StoreInfo.GetItemByItemId(goodItemId);
 			good.Unequip();
 		}
@@ -163,7 +163,7 @@ namespace Soomla.Store
 			SoomlaUtils.LogDebug(TAG, "Checking if " + goodItemId + " is equipped");
 
 			EquippableVG good = (EquippableVG) StoreInfo.GetItemByItemId(goodItemId);
-			
+
 			return VirtualGoodsStorage.IsEquipped(good);;
 		}
 
@@ -187,7 +187,7 @@ namespace Soomla.Store
             SoomlaUtils.LogError(TAG, "There is no virtual good equipped in " + category.Name + " category");
 	        return null;
 	    }
-		
+
 		/// <summary>
 		/// Retrieves the upgrade level of the virtual good with the given <c>goodItemId</c>.
 		/// For Example:
@@ -215,14 +215,14 @@ namespace Soomla.Store
 			if (upgradeVG == null) {
 				return 0; //no upgrade
 			}
-			
+
 			UpgradeVG first = StoreInfo.GetFirstUpgradeForVirtualGood(goodItemId);
 			int level = 1;
 			while (first.ItemId != upgradeVG.ItemId) {
 				first = (UpgradeVG) StoreInfo.GetItemByItemId(first.NextItemId);
 				level++;
 			}
-			
+
 			return level;
 		}
 
@@ -236,7 +236,7 @@ namespace Soomla.Store
 			SoomlaUtils.LogDebug(TAG, "Checking " + goodItemId + " current upgrade");
 
 			VirtualGood good = (VirtualGood) StoreInfo.GetItemByItemId(goodItemId);
-			
+
 			UpgradeVG upgradeVG = VirtualGoodsStorage.GetCurrentUpgrade(good);
 			if (upgradeVG == null) {
 				return "";
@@ -258,9 +258,9 @@ namespace Soomla.Store
 		public static void UpgradeGood(string goodItemId) {
 			SoomlaUtils.LogDebug(TAG, "SOOMLA/UNITY Calling UpgradeGood with: " + goodItemId);
 			VirtualGood good = (VirtualGood) StoreInfo.GetItemByItemId(goodItemId);
-			
+
 			UpgradeVG upgradeVG = VirtualGoodsStorage.GetCurrentUpgrade(good);
-			
+
 			if (upgradeVG != null) {
 				String nextItemId = upgradeVG.NextItemId;
 				if (string.IsNullOrEmpty(nextItemId)) {
@@ -296,7 +296,7 @@ namespace Soomla.Store
 		/// This function refreshes a local set of objects that will hold your user's balances in memory for quick
 		/// and more efficient fetching for your game UI.
 		/// This way, we save many JNI or static calls to native platforms.
-		/// 
+		///
 		/// NOTE: You don't need to call this function as it's automatically called when the game initializes.
 		/// NOTE: This is less useful when you work in editor.
 		/// </summary>
@@ -306,20 +306,20 @@ namespace Soomla.Store
 			localItemBalances = new Dictionary<string, int> ();
 			localUpgrades = new Dictionary<string, LocalUpgrade>();
 			localEquippedGoods = new HashSet<string>();
-			
+
 			foreach(VirtualCurrency item in StoreInfo.Currencies){
 				localItemBalances[item.ItemId] = VirtualCurrencyStorage.GetBalance(item);
 			}
-			
+
 			foreach(VirtualGood item in StoreInfo.Goods){
 				localItemBalances[item.ItemId] =  VirtualGoodsStorage.GetBalance(item);
-				
+
 				UpgradeVG upgrade = VirtualGoodsStorage.GetCurrentUpgrade(item);
 				if (upgrade != null) {
 					int upgradeLevel = GetGoodUpgradeLevel(item.ItemId);
 					localUpgrades.AddOrUpdate(item.ItemId, new LocalUpgrade { itemId = upgrade.ItemId, level = upgradeLevel });
 				}
-				
+
 				if (item is EquippableVG) {
 					if (VirtualGoodsStorage.IsEquipped((EquippableVG)item)) {
 						localEquippedGoods.Add(item.ItemId);
@@ -345,23 +345,23 @@ namespace Soomla.Store
 				}
 			}
 		}
-		
+
 		public static void RefreshOnGoodEquipped(EquippableVG equippable) {
 			localEquippedGoods.Add(equippable.ItemId);
 		}
-		
+
 		public static void RefreshOnGoodUnEquipped(EquippableVG equippable) {
 			localEquippedGoods.Remove(equippable.ItemId);
 		}
-		
+
 		public static void RefreshOnCurrencyBalanceChanged(VirtualCurrency virtualCurrency, int balance, int amountAdded) {
 			UpdateLocalBalance(virtualCurrency.ItemId, balance);
 		}
-		
+
 		public static void RefreshOnGoodBalanceChanged(VirtualGood good, int balance, int amountAdded) {
 			UpdateLocalBalance(good.ItemId, balance);
 		}
-		
+
 		private static void UpdateLocalBalance(string itemId, int balance) {
 			localItemBalances[itemId] = balance;
 		}
@@ -374,7 +374,7 @@ namespace Soomla.Store
 			public int level;
 			public string itemId;
 		}
-		
+
 		private static Dictionary<string, int> localItemBalances = null;
 		private static Dictionary<string, LocalUpgrade> localUpgrades = null;
 		private static HashSet<string> localEquippedGoods = null;

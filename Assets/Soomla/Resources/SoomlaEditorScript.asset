@@ -13,19 +13,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SoomlaSettings:
     values:
+    - name: 536f6f6d6c61536563726574
+      value: 534554204f4e4c59204f4e4345
+    - name: 4465627567556e6974794d65737361676573
+      value: 54727565
     - name: SoomlaSecret
-      value: wilcoxwallden
+      value: walldenwilcox
     - name: DebugUnityMessages
       value: True
     - name: GPlayBP
       value: True
     - name: AndroidPublicKey
-      value: YOUR GOOGLE PLAY PUBLIC KEY
-    - name: IosSSV
-      value: False
-    - name: NoneBP
-      value: False
-    - name: AmazonBP
-      value: False
+      value: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjeE7ZlDBQuv8NuJvah9sCEAdlER/s9GDnTTIqErboJradV1HMI3P4SnNcI1MLSnMgwq+EY5g4BLKihbaKLHFy6LQ6Vj1hD4fExpW74fDwrb74Eo+alZXCQajdk+eQj+UlpmRbbwUgROtO1fwlqEwnmq06Skk2wdmHYfYtw0MqDMHZx03SJdogsxauIw79EalLZ8s0rr0pc7CxvieD/QBXzlokihjOoq3ty8uVfFS4W2WopeHLcnnMbZ4UjUsP2lLrLKDy2r6T4hF8OH0379TeBGNRYTdpzUYMfFTb4xVIBkNyk9eTiICVIOjuXisefjsjDrEAl613PSihES1IYRmTQIDAQAB
     - name: AndroidTestPurchases
       value: True

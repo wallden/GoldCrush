@@ -1,5 +1,30 @@
 fileFormatVersion: 2
 guid: d3b14f2bcf60b448fb56514ace7e147e
+labels:
+- soomla
+- store
+- storekit
+- native
+- unibill
+- prime31
+- codiwans
+- simpleiap
+- iap
+- in app billing
+- billing
+- iap
+- in app purchase
+- coins
+- fraud
+- receipt
+- verification
+- monetization
+- OpenIAB
+- photon
+- builder
+- in app purchase builder
+- stan
+- stans assets
 DefaultImporter:
   userData: 
   assetBundleName: 
