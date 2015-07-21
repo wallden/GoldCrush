@@ -24,12 +24,12 @@ public class GameMaster : MonoBehaviour
 	{
 		Clickers = new Dictionary<string, ClickerType>
             {
-                { "Grandma", new ClickerType { Name = "Grandma", MoveTime = 5, MoveSpeed = 1, DigTime = 5, Income = 2, Cost = 5 } },
-                { "Worker", new ClickerType { Name = "Worker", MoveTime = 4, MoveSpeed = 1.2f, DigTime = 4, Income = 3, Cost = 5 } },
-                { "Foreman", new ClickerType { Name = "Foreman", MoveTime = 3.5f, MoveSpeed = 1.3f, DigTime = 3.5f, Income = 5, Cost = 5  } },
-                { "Driller", new ClickerType { Name = "Driller", MoveTime = 3, MoveSpeed = 1.4f, DigTime = 3, Income = 8, Cost = 5  } },
-                { "Digger", new ClickerType { Name = "Digger", MoveTime = 2.5f, MoveSpeed = 1.6f, DigTime = 2.5f, Income = 13, Cost = 5  } },
-                { "AlienRobot", new ClickerType { Name = "AlienRobot", MoveTime = 2, MoveSpeed = 2, DigTime = 2, Income = 21, Cost = 5  } },
+                { "Grandma", new ClickerType { Name = "Grandma", MoveTime = 5, MoveSpeed = 0.3f, DigTime = 5, Income = 2, Cost = 5 } },
+                { "Worker", new ClickerType { Name = "Worker", MoveTime = 4, MoveSpeed = 0.5f, DigTime = 4, Income = 3, Cost = 5 } },
+                { "Foreman", new ClickerType { Name = "Foreman", MoveTime = 3.5f, MoveSpeed = 0.55f, DigTime = 3.5f, Income = 5, Cost = 5  } },
+                { "Driller", new ClickerType { Name = "Driller", MoveTime = 3, MoveSpeed = 0.65f, DigTime = 3, Income = 8, Cost = 5  } },
+                { "Digger", new ClickerType { Name = "Digger", MoveTime = 2.5f, MoveSpeed = 0.8f, DigTime = 2.5f, Income = 13, Cost = 5  } },
+                { "AlienRobot", new ClickerType { Name = "AlienRobot", MoveTime = 2, MoveSpeed = 1f, DigTime = 2, Income = 21, Cost = 5  } },
             };
 
 		ActiveAutoclickers = new List<ClickGenerator>();
