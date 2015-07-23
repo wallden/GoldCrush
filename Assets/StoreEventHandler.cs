@@ -7,7 +7,7 @@ public class StoreEventHandler
 	{
 		StoreEvents.OnSoomlaStoreInitialized += OnSoomlaStoreInitialized;
 		StoreEvents.OnMarketPurchase += OnMarketPurchase;
-	}
+    }
 
 	private void OnMarketPurchase(PurchasableVirtualItem purchasableVirtualItem, string s, Dictionary<string, string> arg3)
 	{
@@ -16,7 +16,7 @@ public class StoreEventHandler
 
 	private void OnSoomlaStoreInitialized()
 	{
-		Store.TIMEMACHINE_GOOD.Buy("1");
+		
 	}
 
 }
