@@ -28,7 +28,7 @@ public class GameMaster : MonoBehaviour
     {
         Clickers = new Dictionary<string, ClickerType>
             {
-                { "Grandma", new ClickerType { Name = "Grandma", MoveTime = 5, MoveSpeed = 0.3f, DigTime = 5, Income = 2, Cost = 10 } },
+                { "Grandma", new ClickerType { Name = "Grandma", MoveTime = 5, MoveSpeed = 0.3f, DigTime = 5, Income = 2, Cost = 10}},
                 { "Worker", new ClickerType { Name = "Worker", MoveTime = 4, MoveSpeed = 0.5f, DigTime = 4, Income = 3, Cost = 20 } },
                 { "Foreman", new ClickerType { Name = "Foreman", MoveTime = 3.5f, MoveSpeed = 0.55f, DigTime = 3.5f, Income = 5, Cost = 30  } },
                 { "Driller", new ClickerType { Name = "Driller", MoveTime = 3, MoveSpeed = 0.65f, DigTime = 3, Income = 8, Cost = 50  } },
@@ -42,13 +42,13 @@ public class GameMaster : MonoBehaviour
 
     void Update()
     {
-        var autoClickerToUnlock = Clickers.Where(x => !x.Value.Unlocked).OrderBy(x => x.Value.Cost).FirstOrDefault();
+        var autoClickerToUnlock = Clickers.Where(x => !x.Value.SillhouetteUnlocked).OrderBy(x => x.Value.Cost).FirstOrDefault();
         if (autoClickerToUnlock.Value != null)
         {
             if (autoClickerToUnlock.Value.Cost / 4 <= CurrentMoney)
             {
-                autoClickerToUnlock.Value.Unlocked = true;
-                ShowSillhouette(autoClickerToUnlock.Value);
+                autoClickerToUnlock.Value.SillhouetteUnlocked = true;
+                AddAutoClickerButtonToMenu(autoClickerToUnlock.Value);
             }
         }
 
@@ -144,17 +144,12 @@ public class GameMaster : MonoBehaviour
         Text.text = "$" + CurrentMoney;
     }
 
-    private void ShowSillhouette(ClickerType type)
+    private void AddAutoClickerButtonToMenu(ClickerType type)
     {
         var button = Instantiate(BuyAutoClickerButton).GetComponent<Button>();
         button.GetComponent<AutoClickerButton>().Initialize(type);
         button.onClick.AddListener(() => PlayerBuyAutoClicker(type.Name));
         button.transform.SetParent(AutoClickerBuyWindow.transform, false);
-    }
-
-    public void UnlockAutoClicker(string type)
-    {
-
     }
 }
 
@@ -166,7 +161,8 @@ public class ClickerType
     public float DigTime;
     public int Income;
     public int Cost;
-    public bool Unlocked;
+    public bool SillhouetteUnlocked;
+    public bool FullyUnlocked;
 
     private const float MaxRandomOffset = 1 / 5f;
 

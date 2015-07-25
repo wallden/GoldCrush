@@ -1,30 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class AutoClickerButton : MonoBehaviour
 {
 
     private ClickerType _autoClickerType;
-	// Use this for initialization
-	void Start () {
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    if (GameMaster.CurrentMoney <= _autoClickerType.Cost)
+    void Update () {
+	    if (_autoClickerType.Cost <= GameMaster.CurrentMoney && !_autoClickerType.FullyUnlocked)
 	    {
 	        UnlockThis();
+	        _autoClickerType.FullyUnlocked = true;
 	    }
 	}
 
     private void UnlockThis()
     {
-        
+        gameObject.GetComponent<Image>().sprite = ButtonImage.GetButtonImage(_autoClickerType.Name);
     }
 
     public void Initialize(ClickerType type)
     {
         _autoClickerType = type;
+        SetSillhouette();
+        SetButtonTextToCost(type);
+    }
+
+    private void SetButtonTextToCost(ClickerType type)
+    {
+        gameObject.GetComponent<Button>().GetComponentInChildren<Text>().text = "$" + type.Cost;
+    }
+
+    private void SetSillhouette()
+    {
+        gameObject.GetComponent<Image>().sprite = ButtonImage.GetButtonImage(_autoClickerType.Name + "Sillhouette");
     }
 }

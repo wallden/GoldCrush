@@ -187,6 +187,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1 &78039104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 78039106}
+  - 114: {fileID: 78039105}
+  m_Layer: 0
+  m_Name: ButtonImages
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &78039105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 78039104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6608a882b33e5364d816657ae0d00109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GrandmaSillhouette: {fileID: 21300000, guid: baa402e4a8583874eac505361d1cd7ad, type: 3}
+  Grandma: {fileID: 21300008, guid: 39b4a278bef4d8f40beb8a742e287344, type: 3}
+  WorkerSillhouette: {fileID: 21300000, guid: baa402e4a8583874eac505361d1cd7ad, type: 3}
+  Worker: {fileID: 21300036, guid: 39b4a278bef4d8f40beb8a742e287344, type: 3}
+  ForemanSillhouette: {fileID: 21300000, guid: baa402e4a8583874eac505361d1cd7ad, type: 3}
+  Foreman: {fileID: 21300046, guid: 39b4a278bef4d8f40beb8a742e287344, type: 3}
+  DrillerSillhouette: {fileID: 21300000, guid: baa402e4a8583874eac505361d1cd7ad, type: 3}
+  Driller: {fileID: 21300078, guid: 39b4a278bef4d8f40beb8a742e287344, type: 3}
+  DiggerSillhouette: {fileID: 21300000, guid: baa402e4a8583874eac505361d1cd7ad, type: 3}
+  Digger: {fileID: 21300032, guid: 39b4a278bef4d8f40beb8a742e287344, type: 3}
+  AlienRobotSillhouette: {fileID: 21300000, guid: baa402e4a8583874eac505361d1cd7ad,
+    type: 3}
+  AlienRobot: {fileID: 21300104, guid: 39b4a278bef4d8f40beb8a742e287344, type: 3}
+--- !u!4 &78039106
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 78039104}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 66.4991608, y: 402.152344, z: -12.1255493}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
 --- !u!1 &150328872
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,7 +713,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1470005298}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -137, y: -139}
@@ -738,7 +790,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 1
+  m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 50, y: 50}
@@ -1249,8 +1301,8 @@ RectTransform:
   - {fileID: 1100437486}
   - {fileID: 1273980771}
   - {fileID: 150328873}
-  - {fileID: 639196347}
   - {fileID: 1903232370}
+  - {fileID: 639196347}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_AnchorMin: {x: 0, y: 0}
@@ -1420,7 +1472,7 @@ RectTransform:
   m_Children:
   - {fileID: 1717660613}
   m_Father: {fileID: 1470005298}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -244, y: 285}
