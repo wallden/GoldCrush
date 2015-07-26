@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 467836}
   - 212: {fileID: 21275482}
   - 95: {fileID: 9535182}
-  - 114: {fileID: 11484850}
+  - 114: {fileID: 11458158}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 9535182}
---- !u!114 &11484850
+--- !u!114 &11458158
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -98,9 +98,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 127570}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a364f7702d68ce44a952d0622398caed, type: 3}
+  m_Script: {fileID: 11500000, guid: 37cff40218ff60846b90d3dab24f1f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ParticleSystem: {fileID: 19871122}
 --- !u!198 &19871122
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -278,7 +279,7 @@ ParticleSystem:
         rgba: 4294967295
       minMaxState: 0
     startSize:
-      scalar: .300000012
+      scalar: .200000003
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -293,7 +294,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .333333313
+          value: .5
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -386,7 +387,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    cnt0: 5
+    cnt0: 3
     cnt1: 10
     cnt2: 30
     cnt3: 30
@@ -1218,6 +1219,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
       value: .150000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startSize.scalar
+      value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startSize.maxCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startSize.minCurve.m_Curve.Array.data[0].value
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: EmissionModule.cnt0
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

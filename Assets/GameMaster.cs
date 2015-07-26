@@ -97,7 +97,7 @@ public class GameMaster : MonoBehaviour
         var ground = Instantiate(Ground).GetComponent<Clickable>();
 
         var groundPosition = GroundBlocks.Count > 0 ? GroundBlocks.Last().transform.position : FocusPointOffset;
-        ground.Initialize(this, _groundsDestroyed, groundPosition + new Vector3(0, _groundHeightOffset));
+        ground.Initialize(this, _groundsDestroyed, groundPosition + new Vector3(0, _groundHeightOffset, 0));
         GroundBlocks.Add(ground);
     }
 
