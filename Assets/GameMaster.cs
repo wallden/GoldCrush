@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class GameMaster : MonoBehaviour
 {
     public GameObject AutoClickerTemplate;
+    public ParticleSystem MouseClickParticleSystem;
     public GameObject Ground;
     public GameObject BuyAutoClickerButton;
     public GameObject CameraFocusPoint;
@@ -95,6 +96,7 @@ public class GameMaster : MonoBehaviour
     public void GenerateGround()
     {
         var ground = Instantiate(Ground).GetComponent<Clickable>();
+        ground.ParticleSystem = MouseClickParticleSystem;
 
         var groundPosition = GroundBlocks.Count > 0 ? GroundBlocks.Last().transform.position : FocusPointOffset;
         ground.Initialize(this, _groundsDestroyed, groundPosition + new Vector3(0, _groundHeightOffset, 0));

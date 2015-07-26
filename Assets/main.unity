@@ -745,6 +745,26 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &835814418 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 182044, guid: 4cd6fb9196d86cc44b3ecb5aa4e42744, type: 2}
+  m_PrefabInternal: {fileID: 1483122060}
+--- !u!114 &835814419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 835814418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a364f7702d68ce44a952d0622398caed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!198 &835814421 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 19806790, guid: 4cd6fb9196d86cc44b3ecb5aa4e42744,
+    type: 2}
+  m_PrefabInternal: {fileID: 1483122060}
 --- !u!1 &915063700
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,6 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoClickerTemplate: {fileID: 173258, guid: f11b9362d5e6c494883950dea31c1f14, type: 2}
+  MouseClickParticleSystem: {fileID: 835814421}
   Ground: {fileID: 196888, guid: c102ae5e519b40c4ea73ecdce3badd58, type: 2}
   BuyAutoClickerButton: {fileID: 131344, guid: 4d5a87f092d392b47b75f9b1fa762ed7, type: 2}
   CameraFocusPoint: {fileID: 540065172}
@@ -1312,7 +1333,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11447242, guid: 4cd6fb9196d86cc44b3ecb5aa4e42744, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4cd6fb9196d86cc44b3ecb5aa4e42744, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1602578717

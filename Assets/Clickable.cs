@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Clickable : MonoBehaviour
 {
+    public ParticleSystem ParticleSystem;
+
     private int _hp;
     private GameMaster _gameMaster;
 
@@ -15,6 +17,8 @@ public class Clickable : MonoBehaviour
 
     public void OnMouseDown()
     {
+        ParticleSystem.Play();
+
         _gameMaster.MineCurrentGround(1);
     }
 
