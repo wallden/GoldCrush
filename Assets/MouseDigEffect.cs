@@ -20,4 +20,9 @@ public class MouseDigEffect : MonoBehaviour
             _particleSystem.Play();
         }
     }
+
+    public void Dig()
+    {
+        _particleSystem.Play();
+    }
 }

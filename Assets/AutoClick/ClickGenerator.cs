@@ -13,6 +13,8 @@ public class ClickGenerator : MonoBehaviour
     private float _distanceToWalkEdges;
     private float _groundLevel;
 
+    private ParticleSystem _particleSystem;
+
     private const float FallSpeed = 1.5f;
 
     enum CharacterState
@@ -28,6 +30,12 @@ public class ClickGenerator : MonoBehaviour
         _gameMaster = gameMaster;
         _distanceToWalkEdges = distanceToWalkEdges;
         SetNewMoveDirection();
+        _particleSystem = GetComponent<ParticleSystem>();
+    }
+
+    public void DoDig()
+    {
+        _particleSystem.Play();
     }
 
     void Update ()
