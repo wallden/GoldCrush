@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ButtonImage : MonoBehaviour
 {
-
+    //AUTOCLICKERS
     public Sprite GrandmaSillhouette;
     public Sprite Grandma;
     public Sprite WorkerSillhouette;
@@ -19,6 +19,12 @@ public class ButtonImage : MonoBehaviour
     public Sprite AlienRobotSillhouette;
     public Sprite AlienRobot;
 
+    //UPGRADES
+    public Sprite GrandmaUpgradeSillhouette;
+    public Sprite GrandmaUpgrade;
+    public Sprite WorkerUpgradeSillhouette;
+    public Sprite WorkerUpgrade;
+    
 
     
 
@@ -39,6 +45,10 @@ public class ButtonImage : MonoBehaviour
             {"Digger", Digger},
             {"AlienRobotSillhouette", AlienRobotSillhouette},
             {"AlienRobot", AlienRobot},
+            {"GrandmaUpgradeSillhouette", GrandmaUpgradeSillhouette},
+            {"GrandmaUpgrade", GrandmaUpgrade},
+            {"WorkerUpgradeSillhouette", WorkerUpgradeSillhouette},
+            {"WorkerUpgrade", WorkerUpgrade}
 
         };
     }

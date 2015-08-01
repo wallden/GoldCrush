@@ -13,12 +13,15 @@ public class GameMaster : MonoBehaviour
     public ParticleSystem MouseClickParticleSystem;
     public GameObject Ground;
     public GameObject BuyAutoClickerButton;
+    public GameObject BuyUpgradeButton;
     public GameObject CameraFocusPoint;
     public Vector3 FocusPointOffset;
     public Text Text;
     public RectTransform AutoClickerBuyWindow;
+    public RectTransform UpgradesBuyWindow;
 
     private Dictionary<string, ClickerType> Clickers { get; set; }
+    public Dictionary<string, ClickerType> Upgrades { get; set; }
     private List<ClickGenerator> ActiveAutoclickers { get; set; }
     public static int CurrentMoney;
     private int _groundsDestroyed;
@@ -39,13 +42,18 @@ public class GameMaster : MonoBehaviour
                 { "AlienRobot", new ClickerType { Name = "AlienRobot", MoveTime = 2, MoveSpeed = 1f, DigTime = 2, Income = 21, Cost = 100  } },
             };
 
+        Upgrades = new Dictionary<string, ClickerType>
+            {
+                { "GrandmaUpgrade", new ClickerType { Name = "GrandmaUpgrade", Cost = 10}},
+                { "WorkerUpgrade", new ClickerType { Name = "WorkerUpgrade", Cost = 20 } },
+            };
         ActiveAutoclickers = new List<ClickGenerator>();
         GroundBlocks = new List<Clickable>();
     }
 
+
     void Update()
     {
-        //AddAutoClickerButtonToMenu(Clickers["Grandma"]);
         var autoClickerToUnlock = Clickers.Where(x => !x.Value.SillhouetteUnlocked).OrderBy(x => x.Value.Cost).FirstOrDefault();
         if (autoClickerToUnlock.Value != null)
         {
@@ -55,6 +63,16 @@ public class GameMaster : MonoBehaviour
                 AddAutoClickerButtonToMenu(autoClickerToUnlock.Value);
             }
         }
+        var upgradeToUnlock = Upgrades.Where(x => !x.Value.SillhouetteUnlocked).OrderBy(x => x.Value.Cost).FirstOrDefault();
+        if (upgradeToUnlock.Value != null)
+        {
+            if (upgradeToUnlock.Value.Cost / 4 <= CurrentMoney)
+            {
+                upgradeToUnlock.Value.SillhouetteUnlocked = true;
+                AddUpgradeButtonToMenu(upgradeToUnlock.Value);
+            }
+        }
+
 
     }
     private float GroundLevel
@@ -131,6 +149,11 @@ public class GameMaster : MonoBehaviour
 
         return null;
     }
+    public UnityAction PlayerBuyUpgrade(string type)
+    {
+        RemoveCurrency(10);
+        return null;
+    }
 
     public void GroundDestroyed(Clickable clickable)
     {
@@ -170,6 +193,13 @@ public class GameMaster : MonoBehaviour
         button.GetComponent<AutoClickerButton>().Initialize(type);
         button.onClick.AddListener(() => PlayerBuyAutoClicker(type.Name));
         button.transform.SetParent(AutoClickerBuyWindow.transform, false);
+    } 
+    private void AddUpgradeButtonToMenu(ClickerType type)
+    {
+        var button = Instantiate(BuyUpgradeButton).GetComponent<Button>();
+        button.GetComponent<AutoClickerButton>().Initialize(type);
+        button.onClick.AddListener(() => PlayerBuyUpgrade(type.Name));
+        button.transform.SetParent(UpgradesBuyWindow.transform, false);
     }
 }
 

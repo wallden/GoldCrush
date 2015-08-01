@@ -33,8 +33,19 @@ public class PanelWindow : MonoBehaviour
                 InGameStoreRectTransform.gameObject.SetActive(!InGameStoreRectTransform.gameObject.activeSelf);
                 return;
         }
-        _isOpen = !_isOpen;
-        GetComponent<Animator>().SetBool("IsOpen", _isOpen);
+        OpenWindow();
+    }
 
+    public void OpenWindow()
+    {
+        _isOpen = true;
+        GetComponent<Animator>().SetBool("IsOpen", _isOpen);
+    }
+
+    public void CloseWindow()
+    {
+        _isOpen = false;
+        GetComponent<Animator>().SetBool("IsOpen", _isOpen);
+        InGameStoreRectTransform.gameObject.SetActive(false);
     }
 }

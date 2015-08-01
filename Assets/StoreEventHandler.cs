@@ -11,7 +11,7 @@ public class StoreEventHandler
 
 	private void OnMarketPurchase(PurchasableVirtualItem purchasableVirtualItem, string s, Dictionary<string, string> arg3)
 	{
-		var a = "";
+		
 	}
 
 	private void OnSoomlaStoreInitialized()
