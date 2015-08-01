@@ -128,14 +128,21 @@ public class GameMaster : MonoBehaviour
     {
         RemoveCurrency(Clickers[type].Cost);
 
-        if (ActiveAutoclickers.Count >= 1)
+        if (ActiveAutoclickers.Count >= MaxVisibleClickers)
         {
-            var clickersByTypeWithLargestCount = ActiveAutoclickers
+            //var alreadyExistOfSameType = ActiveAutoclickers.Any(x => x.name == type);
+
+            //if (!alreadyExistOfSameType)
+            //{
+                
+            //}
+
+            var clickerTypeWithLargestNumberOfVisible = ActiveAutoclickers
                 .GroupBy(x => x.ClickerType.Name)
                 .OrderBy(x => x.Count())
                 .First();
 
-            clickersByTypeWithLargestCount
+            clickerTypeWithLargestNumberOfVisible
                 .First()
                 .MergeNewClicker();
         }

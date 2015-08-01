@@ -4,6 +4,7 @@ using System.Collections;
 public class ClickGenerator : MonoBehaviour
 {
     public Animator Animator;
+    public Transform View;
     public ClickerType ClickerType { get; private set; }
     public int StackedClickers { get; private set; }
 
@@ -107,8 +108,8 @@ public class ClickGenerator : MonoBehaviour
         FlipMoveDirectionIfAtScreenEdge();
 
         transform.position = Vector3.MoveTowards(transform.position, transform.position + _moveDirection, Time.deltaTime*ClickerType.MoveSpeed);
-        var absoluteXScale = Mathf.Abs(transform.localScale.x);
-        transform.localScale = transform.localScale.SetX(_moveDirection.x >= 0 ? absoluteXScale : -absoluteXScale);
+        var absoluteXScale = Mathf.Abs(View.localScale.x);
+        View.localScale = View.localScale.SetX(_moveDirection.x >= 0 ? absoluteXScale : -absoluteXScale);
     }
 
     private void FlipMoveDirectionIfAtScreenEdge()
