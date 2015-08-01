@@ -10,12 +10,13 @@ public class ClickGenerator : MonoBehaviour
     private ClickerType _clickerType;
     private Vector3 _moveDirection;
     private CharacterState _characterState;
-    private float _distanceToWalkEdges;
     private float _groundLevel;
+    private Vector3 _screenBounds;
 
     private ParticleSystem _particleSystem;
 
     private const float FallSpeed = 1.5f;
+    private const float ScreenPadding = 0.9f;
 
     enum CharacterState
     {
@@ -24,11 +25,10 @@ public class ClickGenerator : MonoBehaviour
         Falling
     }
 
-    public void Initialize(GameMaster gameMaster, ClickerType clickerType, float distanceToWalkEdges)
+    public void Initialize(GameMaster gameMaster, ClickerType clickerType)
     {
         _clickerType = clickerType;
         _gameMaster = gameMaster;
-        _distanceToWalkEdges = distanceToWalkEdges;
         SetNewMoveDirection();
         _particleSystem = GetComponent<ParticleSystem>();
     }
@@ -40,7 +40,9 @@ public class ClickGenerator : MonoBehaviour
 
     void Update ()
 	{
-	    if (_characterState == CharacterState.Walking)
+        _screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height))*ScreenPadding;
+
+        if (_characterState == CharacterState.Walking)
 	    {
             MoveToTarget();
 
@@ -100,19 +102,24 @@ public class ClickGenerator : MonoBehaviour
 
     private void MoveToTarget()
     {
+        FlipMoveDirectionIfAtScreenEdge();
+
         transform.position = Vector3.MoveTowards(transform.position, transform.position + _moveDirection, Time.deltaTime*_clickerType.MoveSpeed);
         var absoluteXScale = Mathf.Abs(transform.localScale.x);
         transform.localScale = transform.localScale.SetX(_moveDirection.x >= 0 ? absoluteXScale : -absoluteXScale);
     }
 
+    private void FlipMoveDirectionIfAtScreenEdge()
+    {
+        if (Mathf.Abs(transform.position.x) > _screenBounds.x)
+        {
+            _moveDirection.x = transform.position.x < -_screenBounds.x ? 1 : -1;
+        }
+    }
+
     private void SetNewMoveDirection()
     {
         _moveDirection = new Vector3(Random.Range(-1f, 1f), 0, 0).normalized;
-
-        if (Mathf.Abs(_moveDirection.x*_clickerType.MoveTime*_clickerType.MoveSpeed + transform.position.x) > _distanceToWalkEdges)
-        {
-            _moveDirection.x = -_moveDirection.x;
-        }
     }
 
     public void GroundRemoved(float newGroundLevel)
