@@ -126,7 +126,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!1 &66308164
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,6 +998,10 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1100437485}
+    - target: {fileID: 173258, guid: f11b9362d5e6c494883950dea31c1f14, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
 --- !u!1 &1190510489
 GameObject:
   m_ObjectHideFlags: 0

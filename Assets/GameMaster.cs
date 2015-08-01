@@ -24,6 +24,7 @@ public class GameMaster : MonoBehaviour
     private int _groundsDestroyed;
     private float _groundHeightOffset;
     private StoreEventHandler _storeEventHandler;
+    private Vector3 _screenBounds;
 
     public GameMaster()
     {
@@ -73,6 +74,7 @@ public class GameMaster : MonoBehaviour
     public void Start()
     {
         _groundHeightOffset = -Ground.transform.localScale.y / 2;
+        _screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
 
         Initialize();
     }
@@ -107,7 +109,7 @@ public class GameMaster : MonoBehaviour
     {
         RemoveCurrency(Clickers[type].Cost);
         var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
-        clickGenerator.Initialize(this, Clickers[type].CloneWithRandom(), 8);
+        clickGenerator.Initialize(this, Clickers[type].CloneWithRandom(), _screenBounds.x);
         clickGenerator.transform.position = new Vector3(0, GroundLevel);
         ActiveAutoclickers.Add(clickGenerator);
 
