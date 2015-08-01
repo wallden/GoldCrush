@@ -19,7 +19,7 @@ public class Clickable : MonoBehaviour
     {
         ParticleSystem.Play();
 
-        _gameMaster.MineCurrentGround(1);
+        _gameMaster.MineCurrentGround(GameMaster.MoneyPerClick);
     }
 
     public void RemoveHp(int amount)

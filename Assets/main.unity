@@ -328,7 +328,7 @@ GameObject:
   - 4: {fileID: 78039106}
   - 114: {fileID: 78039105}
   m_Layer: 0
-  m_Name: AutoClickerButtonImages
+  m_Name: ButtonImages
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -358,12 +358,26 @@ MonoBehaviour:
   AlienRobotSillhouette: {fileID: 21300000, guid: baa402e4a8583874eac505361d1cd7ad,
     type: 3}
   AlienRobot: {fileID: 21300104, guid: 39b4a278bef4d8f40beb8a742e287344, type: 3}
-  GrandmaUpgradeSillhouette: {fileID: 21300000, guid: a3983c59ebf804b4abba687bd7c9e92f,
+  GrandmaIncomeUpgradeSillhouette: {fileID: 21300000, guid: a3983c59ebf804b4abba687bd7c9e92f,
     type: 3}
-  GrandmaUpgrade: {fileID: 21300000, guid: eb5f6e2757c821940b69cf1456f7865a, type: 3}
-  WorkerUpgradeSillhouette: {fileID: 21300000, guid: a94c9a7eb94ceec4a8d67a1890e22e51,
+  GrandmaIncomeUpgrade: {fileID: 21300000, guid: 5b1a64ea234fb2343b8d0686c51280de,
     type: 3}
-  WorkerUpgrade: {fileID: 21300000, guid: f588d850485d0ae479d73cf3bd0b7b00, type: 3}
+  GrandmaMoveAndDigUpgradeSillhouette: {fileID: 21300000, guid: f588d850485d0ae479d73cf3bd0b7b00,
+    type: 3}
+  GrandmaMoveAndDigUpgrade: {fileID: 21300000, guid: eb5f6e2757c821940b69cf1456f7865a,
+    type: 3}
+  WorkerIncomeUpgradeSillhouette: {fileID: 21300012, guid: 09d53836d44f4214987b2c42eeac5a20,
+    type: 3}
+  WorkerIncomeUpgrade: {fileID: 21300000, guid: c9649f2c7f92a4241889c2b60078347f,
+    type: 3}
+  WorkerMoveAndDigUpgradeSillhouette: {fileID: 21300000, guid: 9d7c6e4896067aa4fa512a00f692ac1c,
+    type: 3}
+  WorkerMoveAndDigUpgrade: {fileID: 21300002, guid: 09d53836d44f4214987b2c42eeac5a20,
+    type: 3}
+  MouseClickClickUpgradeSillhouette: {fileID: 21300002, guid: 39b4a278bef4d8f40beb8a742e287344,
+    type: 3}
+  MouseClickClickUpgrade: {fileID: 21300044, guid: 39b4a278bef4d8f40beb8a742e287344,
+    type: 3}
 --- !u!4 &78039106
 Transform:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
@@ -6,6 +7,7 @@ using Soomla.Store;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameMaster : MonoBehaviour
 {
@@ -19,6 +21,10 @@ public class GameMaster : MonoBehaviour
     public Text Text;
     public RectTransform AutoClickerBuyWindow;
     public RectTransform UpgradesBuyWindow;
+
+    public static int MoneyPerClick = 1;
+    public static int IncomeUpgradeValue = 2;
+    public static float MoveAndDigUpgradeValue = 1.3f;
 
     private Dictionary<string, ClickerType> Clickers { get; set; }
     public Dictionary<string, ClickerType> Upgrades { get; set; }
@@ -44,8 +50,11 @@ public class GameMaster : MonoBehaviour
 
         Upgrades = new Dictionary<string, ClickerType>
             {
-                { "GrandmaUpgrade", new ClickerType { Name = "GrandmaUpgrade", Cost = 10}},
-                { "WorkerUpgrade", new ClickerType { Name = "WorkerUpgrade", Cost = 20 } },
+                { "Grandma IncomeUpgrade", new ClickerType { Name = "Grandma IncomeUpgrade", Cost = 10}},
+                { "Grandma MoveAndDigUpgrade", new ClickerType { Name = "Grandma MoveAndDigUpgrade", Cost = 10}},
+                { "Worker IncomeUpgrade", new ClickerType { Name = "Worker IncomeUpgrade", Cost = 20 } },
+                { "Worker MoveAndDigUpgrade", new ClickerType { Name = "Worker MoveAndDigUpgrade", Cost = 20 } },
+                { "MouseClick ClickUpgrade", new ClickerType { Name = "MouseClick ClickUpgrade", Cost = 20 } },
             };
         ActiveAutoclickers = new List<ClickGenerator>();
         GroundBlocks = new List<Clickable>();
@@ -160,7 +169,33 @@ public class GameMaster : MonoBehaviour
     }
     public UnityAction PlayerBuyUpgrade(string type)
     {
-        RemoveCurrency(10);
+        var nameAndUpgradeTypeArray = type.Split(' ');
+        RemoveCurrency(Upgrades[type].Cost);
+
+        switch (nameAndUpgradeTypeArray[1])
+        {
+            case("IncomeUpgrade"):
+                Clickers[nameAndUpgradeTypeArray[0]].Income *= IncomeUpgradeValue;
+                ActiveAutoclickers.Where(x => x.ClickerType.Name == nameAndUpgradeTypeArray[0]).ToList().ForEach(x => x.ClickerType.Income *= IncomeUpgradeValue);
+        
+                break;
+            case("MoveAndDigUpgrade"):
+                Clickers[nameAndUpgradeTypeArray[0]].DigTime *= 2-MoveAndDigUpgradeValue;
+                Clickers[nameAndUpgradeTypeArray[0]].MoveSpeed *= MoveAndDigUpgradeValue;
+                Clickers[nameAndUpgradeTypeArray[0]].MoveTime *= 2-MoveAndDigUpgradeValue;
+                var list = ActiveAutoclickers.Where(x => x.ClickerType.Name == nameAndUpgradeTypeArray[0]).ToList();
+                foreach (var clickGenerator in list)
+                {
+                    clickGenerator.ClickerType.DigTime *= 2-MoveAndDigUpgradeValue;
+                    clickGenerator.ClickerType.MoveSpeed *= MoveAndDigUpgradeValue;
+                    clickGenerator.ClickerType.MoveTime *= 2-MoveAndDigUpgradeValue;
+                }
+                break;
+            case("ClickUpgrade"):
+                MoneyPerClick += 1;
+                break;
+        }
+        
         return null;
     }
 
@@ -252,7 +287,6 @@ public class GameMaster : MonoBehaviour
         button.transform.SetParent(UpgradesBuyWindow.transform, false);
     }
 }
-
 public class ClickerType
 {
     public string Name;

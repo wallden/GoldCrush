@@ -20,10 +20,16 @@ public class ButtonImage : MonoBehaviour
     public Sprite AlienRobot;
 
     //UPGRADES
-    public Sprite GrandmaUpgradeSillhouette;
-    public Sprite GrandmaUpgrade;
-    public Sprite WorkerUpgradeSillhouette;
-    public Sprite WorkerUpgrade;
+    public Sprite GrandmaIncomeUpgradeSillhouette;
+    public Sprite GrandmaIncomeUpgrade;
+    public Sprite GrandmaMoveAndDigUpgradeSillhouette;
+    public Sprite GrandmaMoveAndDigUpgrade;
+    public Sprite WorkerIncomeUpgradeSillhouette;
+    public Sprite WorkerIncomeUpgrade;
+    public Sprite WorkerMoveAndDigUpgradeSillhouette;
+    public Sprite WorkerMoveAndDigUpgrade;
+    public Sprite MouseClickClickUpgradeSillhouette;
+    public Sprite MouseClickClickUpgrade;
     
 
     
@@ -45,10 +51,16 @@ public class ButtonImage : MonoBehaviour
             {"Digger", Digger},
             {"AlienRobotSillhouette", AlienRobotSillhouette},
             {"AlienRobot", AlienRobot},
-            {"GrandmaUpgradeSillhouette", GrandmaUpgradeSillhouette},
-            {"GrandmaUpgrade", GrandmaUpgrade},
-            {"WorkerUpgradeSillhouette", WorkerUpgradeSillhouette},
-            {"WorkerUpgrade", WorkerUpgrade}
+            {"Grandma IncomeUpgradeSillhouette", GrandmaIncomeUpgradeSillhouette},
+            {"Grandma IncomeUpgrade", GrandmaIncomeUpgrade},
+            {"Grandma MoveAndDigUpgradeSillhouette", GrandmaMoveAndDigUpgradeSillhouette},
+            {"Grandma MoveAndDigUpgrade", GrandmaMoveAndDigUpgrade},
+            {"Worker IncomeUpgradeSillhouette", WorkerIncomeUpgradeSillhouette},
+            {"Worker IncomeUpgrade", WorkerIncomeUpgrade},
+            {"Worker MoveAndDigUpgradeSillhouette", WorkerMoveAndDigUpgradeSillhouette},
+            {"Worker MoveAndDigUpgrade", WorkerMoveAndDigUpgrade},
+            {"MouseClick ClickUpgradeSillhouette", MouseClickClickUpgradeSillhouette},
+            {"MouseClick ClickUpgrade", MouseClickClickUpgrade}
 
         };
     }
