@@ -135,4 +135,9 @@ public class ClickGenerator : MonoBehaviour
     {
         StackedClickers += 1;
     }
+
+    public void MergeExistingClicker(ClickGenerator existingClicker)
+    {
+        StackedClickers += existingClicker.StackedClickers;
+    }
 }
