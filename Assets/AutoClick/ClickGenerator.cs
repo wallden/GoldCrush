@@ -4,10 +4,11 @@ using System.Collections;
 public class ClickGenerator : MonoBehaviour
 {
     public Animator Animator;
+    public ClickerType ClickerType { get; private set; }
+    public int StackedClickers { get; private set; }
 
     private float _elapsedTime;
     private GameMaster _gameMaster;
-    private ClickerType _clickerType;
     private Vector3 _moveDirection;
     private CharacterState _characterState;
     private float _groundLevel;
@@ -27,7 +28,8 @@ public class ClickGenerator : MonoBehaviour
 
     public void Initialize(GameMaster gameMaster, ClickerType clickerType)
     {
-        _clickerType = clickerType;
+        ClickerType = clickerType;
+        StackedClickers = 1;
         _gameMaster = gameMaster;
         SetNewMoveDirection();
         _particleSystem = GetComponent<ParticleSystem>();
@@ -46,7 +48,7 @@ public class ClickGenerator : MonoBehaviour
 	    {
             MoveToTarget();
 
-            if (_elapsedTime > _clickerType.MoveTime)
+            if (_elapsedTime > ClickerType.MoveTime)
             {
                 SetCharacterState(CharacterState.Mining);
             }
@@ -54,7 +56,7 @@ public class ClickGenerator : MonoBehaviour
 
         if (_characterState == CharacterState.Mining)
 	    {
-            if (_elapsedTime > _clickerType.DigTime)
+            if (_elapsedTime > ClickerType.DigTime)
             {
                 SetCharacterState(CharacterState.Walking);
                 FinishMining();
@@ -97,14 +99,14 @@ public class ClickGenerator : MonoBehaviour
 
     private void FinishMining()
     {
-        _gameMaster.MineCurrentGround(_clickerType.Income);
+        _gameMaster.MineCurrentGround(ClickerType.Income*StackedClickers);
     }
 
     private void MoveToTarget()
     {
         FlipMoveDirectionIfAtScreenEdge();
 
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + _moveDirection, Time.deltaTime*_clickerType.MoveSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + _moveDirection, Time.deltaTime*ClickerType.MoveSpeed);
         var absoluteXScale = Mathf.Abs(transform.localScale.x);
         transform.localScale = transform.localScale.SetX(_moveDirection.x >= 0 ? absoluteXScale : -absoluteXScale);
     }
@@ -126,5 +128,10 @@ public class ClickGenerator : MonoBehaviour
     {
         _groundLevel = newGroundLevel;
         SetCharacterState(CharacterState.Falling);
+    }
+
+    public void MergeNewClicker()
+    {
+        StackedClickers += 1;
     }
 }

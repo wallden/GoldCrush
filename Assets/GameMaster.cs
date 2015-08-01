@@ -25,6 +25,8 @@ public class GameMaster : MonoBehaviour
     private float _groundHeightOffset;
     private StoreEventHandler _storeEventHandler;
 
+    private const int MaxVisibleClickers = 10;
+
     public GameMaster()
     {
         Clickers = new Dictionary<string, ClickerType>
@@ -107,10 +109,25 @@ public class GameMaster : MonoBehaviour
     public UnityAction PlayerBuyAutoClicker(string type)
     {
         RemoveCurrency(Clickers[type].Cost);
-        var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
-        clickGenerator.Initialize(this, Clickers[type].CloneWithRandom());
-        clickGenerator.transform.position = new Vector3(0, GroundLevel);
-        ActiveAutoclickers.Add(clickGenerator);
+
+        if (ActiveAutoclickers.Count >= 1)
+        {
+            var clickersByTypeWithLargestCount = ActiveAutoclickers
+                .GroupBy(x => x.ClickerType.Name)
+                .OrderBy(x => x.Count())
+                .First();
+
+            clickersByTypeWithLargestCount
+                .First()
+                .MergeNewClicker();
+        }
+        else
+        {
+            var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
+            clickGenerator.Initialize(this, Clickers[type].CloneWithRandom());
+            clickGenerator.transform.position = new Vector3(0, GroundLevel);
+            ActiveAutoclickers.Add(clickGenerator);
+        }
 
         return null;
     }
