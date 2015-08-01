@@ -1026,6 +1026,10 @@ Prefab:
       propertyPath: m_Name
       value: AutoClicker (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 173258, guid: f11b9362d5e6c494883950dea31c1f14, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11484850, guid: f11b9362d5e6c494883950dea31c1f14, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: f11b9362d5e6c494883950dea31c1f14, type: 2}
