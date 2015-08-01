@@ -108,7 +108,7 @@ public class GameMaster : MonoBehaviour
     {
         RemoveCurrency(Clickers[type].Cost);
         var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
-        clickGenerator.Initialize(this, Clickers[type].CloneWithRandom(), 8);
+        clickGenerator.Initialize(this, Clickers[type].CloneWithRandom());
         clickGenerator.transform.position = new Vector3(0, GroundLevel);
         ActiveAutoclickers.Add(clickGenerator);
 
