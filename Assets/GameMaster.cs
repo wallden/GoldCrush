@@ -43,6 +43,7 @@ public class GameMaster : MonoBehaviour
 
     void Update()
     {
+        //AddAutoClickerButtonToMenu(Clickers["Grandma"]);
         var autoClickerToUnlock = Clickers.Where(x => !x.Value.SillhouetteUnlocked).OrderBy(x => x.Value.Cost).FirstOrDefault();
         if (autoClickerToUnlock.Value != null)
         {

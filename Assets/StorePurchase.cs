@@ -9,20 +9,29 @@ public class StorePurchase : MonoBehaviour
 {
 
     public Text statusText;
+    public Text CurrentInGameCurrency;
     void Start ()
 	{
 	    StoreEvents.OnMarketPurchase += OnMarketPurchase;
-	}
+	    
+    }
 	
-	void Update () {
-	
+	void Update ()
+	{
+	    CurrentInGameCurrency.text = Store.DIAMOND_CURRENCY.GetBalance().ToString();
+            
 	}
+
     private void OnMarketPurchase(PurchasableVirtualItem purchasableVirtualItem, string s, Dictionary<string, string> arg3)
     {
-        var a = "";
         statusText.text = "You purchased" +" "+ purchasableVirtualItem.Name;
     }
-    
+
+    public void PurchaseCurrency(string amount)
+    {
+        Store.HUND_DIAMONDS_PACK.Buy(amount);
+        
+    }
   public void PurchaseTimeMachine(string amount)
     {
         //Store.TIMEMACHINE_GOOD.Buy(amount);

@@ -14,7 +14,7 @@ public class Store : IStoreAssets
 
 	public VirtualCurrency[] GetCurrencies()
 	{
-		return new VirtualCurrency[] { COIN_CURRENCY };
+		return new VirtualCurrency[] { DIAMOND_CURRENCY };
 	}
 
 	public VirtualGood[] GetGoods()
@@ -24,7 +24,7 @@ public class Store : IStoreAssets
 
 	public VirtualCurrencyPack[] GetCurrencyPacks()
 	{
-		return new VirtualCurrencyPack[] { HUND_COIN_PACK };
+		return new VirtualCurrencyPack[] { HUND_DIAMONDS_PACK };
 	}
 
 	public VirtualCategory[] GetCategories()
@@ -34,22 +34,22 @@ public class Store : IStoreAssets
 
 	/** Virtual Currencies **/
 
-	public static VirtualCurrency COIN_CURRENCY = new VirtualCurrency(
-	  "Coin",                               // Name
-	  "Coin currency",                      // Description
-	  "coin_currency_ID"                    // Item ID
+	public static VirtualCurrency DIAMOND_CURRENCY = new VirtualCurrency(
+	  "Diamond",                               // Name
+	  "Diamond currency",                      // Description
+	  "Diamond_currency_ID"                    // Item ID
 	);
 
 	/** Virtual Currency Packs **/
 
-	public static VirtualCurrencyPack HUND_COIN_PACK = new VirtualCurrencyPack(
-	  "100 Coins",                          // Name
-	  "100 coin currency units",            // Description
-	  "coins_100_ID",                       // Item ID
+	public static VirtualCurrencyPack HUND_DIAMONDS_PACK = new VirtualCurrencyPack(
+	  "100 Diamonds",                          // Name
+	  "100 Diamond currency units",            // Description
+	  "diamonds_100_ID",                       // Item ID
 	  100,                                  // Number of currencies in the pack
-	  "coin_currency_ID",                   // ID of the currency associated with this pack
+	  "Diamond_currency_ID",                   // ID of the currency associated with this pack
 	  new PurchaseWithMarket(               // Purchase type (with real money $)
-		"coins_100_PROD_ID",                   // Product ID
+		"diamonds_100_PROD_ID",                   // Product ID
 		1.99                                   // Price (in real money $)
 	  )
 	);
