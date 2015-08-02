@@ -102,7 +102,8 @@ public class GameMaster : MonoBehaviour
 
     public void Start()
     {
-        _groundHeightOffset = -Ground.transform.localScale.y / 2;
+        var spriteHeight = Ground.GetComponent<SpriteRenderer>().sprite.bounds.size.y;
+        _groundHeightOffset = -Ground.transform.localScale.y * spriteHeight / 2;
 
         Initialize();
     }

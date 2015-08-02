@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &102398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 431438}
+  - 199: {fileID: 19930776}
+  - 198: {fileID: 19831136}
+  m_Layer: 0
+  m_Name: ParticleSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &111862
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,8 +78,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 499456}
   - 114: {fileID: 11431850}
-  - 199: {fileID: 19978688}
-  - 198: {fileID: 19871122}
   - 114: {fileID: 11446584}
   - 114: {fileID: 11417318}
   m_Layer: 0
@@ -79,11 +94,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: .150000006, y: .150000006, z: .150000006}
   m_Children: []
   m_Father: {fileID: 499456}
   m_RootOrder: 2
+--- !u!4 &431438
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102398}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 499456}
+  m_RootOrder: 3
 --- !u!4 &467836
 Transform:
   m_ObjectHideFlags: 1
@@ -103,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .800000012, z: 0}
+  m_LocalPosition: {x: 0, y: .800000012, z: -1}
   m_LocalScale: {x: .150000006, y: .150000006, z: .150000006}
   m_Children: []
   m_Father: {fileID: 499456}
@@ -115,12 +142,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173258}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 467836}
   - {fileID: 479798}
   - {fileID: 400754}
+  - {fileID: 431438}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!23 &2317688
@@ -278,13 +306,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37cff40218ff60846b90d3dab24f1f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParticleSystem: {fileID: 19871122}
---- !u!198 &19871122
+  ParticleSystem: {fileID: 19831136}
+--- !u!198 &19831136
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 173258}
+  m_GameObject: {fileID: 102398}
   lengthInSec: 1
   startDelay: 0
   speed: 1
@@ -296,7 +324,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 1
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -634,7 +662,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 3
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       maxGradient:
         key0:
@@ -1312,12 +1340,12 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
---- !u!199 &19978688
+--- !u!199 &19930776
 ParticleSystemRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 173258}
+  m_GameObject: {fileID: 102398}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1334,7 +1362,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1883749287
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MaxParticleSize: .5
@@ -1416,6 +1444,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: lengthInSec
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: -1883749287
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
