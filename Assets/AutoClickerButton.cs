@@ -18,6 +18,8 @@ public class AutoClickerButton : MonoBehaviour
     private void UnlockThis()
     {
         gameObject.GetComponent<Image>().sprite = ButtonImage.GetButtonImage(_autoClickerType.Name);
+        GetComponent<Button>().interactable = true;
+
     }
 
     public void Initialize(ClickerType type)
@@ -25,6 +27,7 @@ public class AutoClickerButton : MonoBehaviour
         _autoClickerType = type;
         SetSillhouette();
         SetButtonTextToCost(type);
+        GetComponent<Button>().interactable = false;
     }
 
     private void SetButtonTextToCost(ClickerType type)

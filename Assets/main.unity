@@ -98,7 +98,7 @@ GameObject:
   - 222: {fileID: 9161736}
   - 114: {fileID: 9161735}
   m_Layer: 5
-  m_Name: InGameStorePanel
+  m_Name: StorePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,13 +117,13 @@ RectTransform:
   - {fileID: 645666822}
   - {fileID: 1592008628}
   - {fileID: 967748712}
-  m_Father: {fileID: 189308212}
-  m_RootOrder: 2
+  m_Father: {fileID: 1470005298}
+  m_RootOrder: 5
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 774.5, y: -198}
+  m_AnchoredPosition: {x: -174, y: -9.93999958}
   m_SizeDelta: {x: 400, y: 200}
-  m_Pivot: {x: .5, y: .5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &9161735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +421,6 @@ RectTransform:
   m_Children:
   - {fileID: 1101426921}
   - {fileID: 639196347}
-  - {fileID: 9161734}
   - {fileID: 1903232370}
   - {fileID: 1273980771}
   - {fileID: 1209747352}
@@ -639,7 +638,7 @@ MonoBehaviour:
   m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -1200,7 +1199,7 @@ MonoBehaviour:
   MouseClickParticleSystem: {fileID: 835814421}
   Ground: {fileID: 155530, guid: 9ff3259ae6c7b114f9f8d10e19b9464d, type: 2}
   BuyAutoClickerButton: {fileID: 131344, guid: 4d5a87f092d392b47b75f9b1fa762ed7, type: 2}
-  BuyUpgradeButton: {fileID: 131344, guid: aded060b3e7266f4cbc2b9ffd4502a82, type: 2}
+  BuyUpgradeButton: {fileID: 131344, guid: 4d5a87f092d392b47b75f9b1fa762ed7, type: 2}
   CameraFocusPoint: {fileID: 540065172}
   FocusPointOffset: {x: 0, y: -1.5, z: 0}
   Text: {fileID: 1100437488}
@@ -1450,7 +1449,7 @@ MonoBehaviour:
   m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -1582,7 +1581,7 @@ RectTransform:
   m_Children:
   - {fileID: 47951003}
   m_Father: {fileID: 189308212}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 378.799988, y: -57}
@@ -1697,7 +1696,7 @@ RectTransform:
   m_Children:
   - {fileID: 1030387568}
   m_Father: {fileID: 189308212}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 380, y: -113}
@@ -1827,12 +1826,12 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 750, y: 1334}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: .5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1846,13 +1845,13 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 2
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 259453216}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1261847627
   m_SortingOrder: 0
 --- !u!224 &1470005298
 RectTransform:
@@ -1869,6 +1868,7 @@ RectTransform:
   - {fileID: 2121028130}
   - {fileID: 1100437486}
   - {fileID: 189308212}
+  - {fileID: 9161734}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -2285,7 +2285,7 @@ RectTransform:
   m_Children:
   - {fileID: 1717660613}
   m_Father: {fileID: 189308212}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 376.399994, y: -15.1999998}
@@ -2529,7 +2529,7 @@ MonoBehaviour:
   m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
