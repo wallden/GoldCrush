@@ -16,6 +16,6 @@ public class CloseAllMenus : MonoBehaviour {
 
     // Update is called once per frame
 	void Update () {
-	   LocalRect.sizeDelta = new Vector3(Screen.width, (Screen.height/1.5f));
+	   LocalRect.sizeDelta = new Vector3(Screen.width, (Screen.height/1.1f));
 	}
 }

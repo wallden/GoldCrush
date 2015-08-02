@@ -32,8 +32,7 @@ public class GameMaster : MonoBehaviour
     public static int CurrentMoney;
     private int _groundsDestroyed;
     private float _groundHeightOffset;
-    private StoreEventHandler _storeEventHandler;
-
+    
     private const int MaxVisibleClickers = 8;
 
     public GameMaster()
@@ -109,8 +108,7 @@ public class GameMaster : MonoBehaviour
 
     private void Initialize()
     {
-        _storeEventHandler = new StoreEventHandler();
-        SoomlaStore.Initialize(new Store());
+        //SoomlaStore.Initialize(new Store());
         SetCurrency();
         InitializeGround();
     }
