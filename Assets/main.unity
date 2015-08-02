@@ -787,6 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundPrefab: {fileID: 179212, guid: 33e57384c8d68734e86597ee70209448, type: 2}
+  FocusPoint: {fileID: 540065173}
 --- !u!1001 &531430411
 Prefab:
   m_ObjectHideFlags: 0
