@@ -20,10 +20,12 @@ MonoBehaviour:
     - name: SoomlaSecret
       value: walldenwilcox
     - name: DebugUnityMessages
-      value: True
+      value: False
     - name: GPlayBP
       value: True
     - name: AndroidPublicKey
       value: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjeE7ZlDBQuv8NuJvah9sCEAdlER/s9GDnTTIqErboJradV1HMI3P4SnNcI1MLSnMgwq+EY5g4BLKihbaKLHFy6LQ6Vj1hD4fExpW74fDwrb74Eo+alZXCQajdk+eQj+UlpmRbbwUgROtO1fwlqEwnmq06Skk2wdmHYfYtw0MqDMHZx03SJdogsxauIw79EalLZ8s0rr0pc7CxvieD/QBXzlokihjOoq3ty8uVfFS4W2WopeHLcnnMbZ4UjUsP2lLrLKDy2r6T4hF8OH0379TeBGNRYTdpzUYMfFTb4xVIBkNyk9eTiICVIOjuXisefjsjDrEAl613PSihES1IYRmTQIDAQAB
     - name: AndroidTestPurchases
       value: True
+    - name: DebugMessages
+      value: False

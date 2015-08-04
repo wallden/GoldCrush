@@ -70,9 +70,9 @@ public class Store : IStoreAssets
 	public static VirtualGood NO_ADS_LTVG = new LifetimeVG(
 	  "No Ads",                             // Name
 	  "No More Ads!",                       // Description
-	  "no_ads_ID",                          // Item ID
+	  "no_ads_item_id",                          // Item ID
 	  new PurchaseWithMarket(               // Purchase type (with real money $)
-		"no_ads_PROD_ID",                      // Product ID
+		"no_ads_id",                      // Product ID
 		0.99                                   // Price (in real money $)
 	  )
 	);
