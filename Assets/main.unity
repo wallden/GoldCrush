@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf8cb38e97c5054aac4682334414338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusText: {fileID: 298130221}
+  StatusText: {fileID: 298130221}
   CurrentInGameCurrency: {fileID: 2121028129}
 --- !u!4 &35479718
 Transform:

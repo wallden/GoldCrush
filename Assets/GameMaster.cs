@@ -109,7 +109,7 @@ public class GameMaster : MonoBehaviour
 
     private void Initialize()
     {
-        //SoomlaStore.Initialize(new Store());
+        SoomlaStore.Initialize(new Store());
         SetCurrency();
         InitializeGround();
     }
