@@ -27,7 +27,7 @@ public class GameMaster : MonoBehaviour
     public static float MoveAndDigUpgradeValue = 1.3f;
 
     private Dictionary<string, ClickerType> Clickers { get; set; }
-    public Dictionary<string, ClickerType> Upgrades { get; set; }
+    public Dictionary<string, UpgradeType> Upgrades { get; set; }
     private List<ClickGenerator> ActiveAutoclickers { get; set; }
     public static int CurrentMoney;
     private int _groundsDestroyed;
@@ -47,13 +47,13 @@ public class GameMaster : MonoBehaviour
                 { "AlienRobot", new ClickerType { Name = "AlienRobot", MoveTime = 2, MoveSpeed = 1f, DigTime = 2, Income = 21, Cost = 100  } },
             };
 
-        Upgrades = new Dictionary<string, ClickerType>
+        Upgrades = new Dictionary<string, UpgradeType>
             {
-                { "Grandma IncomeUpgrade", new ClickerType { Name = "Grandma IncomeUpgrade", Cost = 10}},
-                { "Grandma MoveAndDigUpgrade", new ClickerType { Name = "Grandma MoveAndDigUpgrade", Cost = 10}},
-                { "Worker IncomeUpgrade", new ClickerType { Name = "Worker IncomeUpgrade", Cost = 20 } },
-                { "Worker MoveAndDigUpgrade", new ClickerType { Name = "Worker MoveAndDigUpgrade", Cost = 20 } },
-                { "MouseClick ClickUpgrade", new ClickerType { Name = "MouseClick ClickUpgrade", Cost = 20 } },
+                { "Grandma IncomeUpgrade", new UpgradeType { Name = "Grandma IncomeUpgrade", Cost = 10, UnlocksAtPlayerLevel = 1}},
+                { "Grandma MoveAndDigUpgrade", new UpgradeType { Name = "Grandma MoveAndDigUpgrade", Cost = 10, UnlocksAtPlayerLevel = 1}},
+                { "Worker IncomeUpgrade", new UpgradeType { Name = "Worker IncomeUpgrade", Cost = 20, UnlocksAtPlayerLevel = 1 } },
+                { "Worker MoveAndDigUpgrade", new UpgradeType { Name = "Worker MoveAndDigUpgrade", Cost = 20, UnlocksAtPlayerLevel = 1 } },
+                { "MouseClick ClickUpgrade", new UpgradeType { Name = "MouseClick ClickUpgrade", Cost = 20, UnlocksAtPlayerLevel = 1 } },
             };
         ActiveAutoclickers = new List<ClickGenerator>();
         GroundBlocks = new List<Clickable>();
@@ -74,7 +74,7 @@ public class GameMaster : MonoBehaviour
         var upgradeToUnlock = Upgrades.Where(x => !x.Value.SillhouetteUnlocked).OrderBy(x => x.Value.Cost).FirstOrDefault();
         if (upgradeToUnlock.Value != null)
         {
-            if (upgradeToUnlock.Value.Cost / 4 <= CurrentMoney)
+            if (upgradeToUnlock.Value.UnlocksAtPlayerLevel == Player.PlayerLevel)
             {
                 upgradeToUnlock.Value.SillhouetteUnlocked = true;
                 AddUpgradeButtonToMenu(upgradeToUnlock.Value);
@@ -257,6 +257,7 @@ public class GameMaster : MonoBehaviour
         CurrentMoney += amountMined;
         CurrentGround.RemoveHp(amountMined);
         SetCurrency();
+        Player.CurrentExperiencePoints += 100;
     }
 
     public void RemoveCurrency(int amount)
@@ -277,10 +278,10 @@ public class GameMaster : MonoBehaviour
         button.onClick.AddListener(() => PlayerBuyAutoClicker(type.Name));
         button.transform.SetParent(AutoClickerBuyWindow.transform, false);
     } 
-    private void AddUpgradeButtonToMenu(ClickerType type)
+    private void AddUpgradeButtonToMenu(UpgradeType type)
     {
         var button = Instantiate(BuyUpgradeButton).GetComponent<Button>();
-        button.GetComponent<AutoClickerButton>().Initialize(type);
+        button.GetComponent<UpgradeButton>().Initialize(type);
         button.onClick.AddListener(() => PlayerBuyUpgrade(type.Name));
         button.transform.SetParent(UpgradesBuyWindow.transform, false);
     }
@@ -312,6 +313,25 @@ public class ClickerType
 
         return newWithRandom;
     }
+
+    private float GetWithRandomOffset(float currentValue)
+    {
+        return currentValue + Random.Range(-currentValue * MaxRandomOffset, currentValue * MaxRandomOffset);
+    }
+}
+public class UpgradeType
+{
+    public string Name;
+    public float MoveTime;
+    public float MoveSpeed;
+    public float DigTime;
+    public int Income;
+    public int Cost;
+    public int UnlocksAtPlayerLevel;
+    public bool SillhouetteUnlocked;
+    public bool FullyUnlocked;
+
+    private const float MaxRandomOffset = 1 / 5f;
 
     private float GetWithRandomOffset(float currentValue)
     {
