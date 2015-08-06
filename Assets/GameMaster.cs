@@ -172,7 +172,6 @@ public class GameMaster : MonoBehaviour
     public UnityAction PlayerBuyAutoClicker(string type)
     {
         RemoveCurrency(Clickers[type].Cost);
-        //var activeNonMergingClickerCount = ActiveAutoclickers.Count - _clickersToMerge.Values.SelectMany(x => x.Clickers).Count() + _clickersToMerge.Count;
 
         if (ActiveAutoclickers.Count >= MaxVisibleClickers)
         {
@@ -224,17 +223,6 @@ public class GameMaster : MonoBehaviour
         {
             _clickersToMerge.Add(typeName, new ClickerMerge(typeName, clickersWithLeastStacked));
         }
-
-        //var existingToMerge = clickersWithLeastStacked
-        //    .Skip(1)
-        //    .First();
-
-        //clickersWithLeastStacked
-        //    .First()
-        //    .MergeExistingClicker(
-        //        existingToMerge);
-
-        //DestroyClicker(existingToMerge);
     }
 
     private List<ClickGenerator> GetAlreadyMergingClickers(string type)
