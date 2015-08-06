@@ -9,6 +9,42 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+public class ClickerMerge
+{
+    public string Type;
+    public List<ClickGenerator> Clickers = new List<ClickGenerator>();
+
+    public ClickerMerge(string type, List<ClickGenerator> clickers)
+    {
+        Type = type;
+        AddClickers(clickers);
+    }
+
+    public Vector3 CenterPoint
+    {
+        get
+        {
+            var summedPositions = new Vector3();
+            foreach (var clicker in Clickers)
+            {
+                summedPositions += clicker.transform.position;
+            }
+            return summedPositions/Clickers.Count;
+        }
+    }
+
+    public void AddClickers(List<ClickGenerator> clickers)
+    {
+        Clickers.AddRange(clickers.Except(Clickers));
+        clickers.ForEach(x => x.Merge(this));
+    }
+
+    public void Remove(ClickGenerator clicker)
+    {
+        Clickers.Remove(clicker);
+    }
+}
+
 public class GameMaster : MonoBehaviour
 {
     public GameObject AutoClickerTemplate;
@@ -33,7 +69,9 @@ public class GameMaster : MonoBehaviour
     private int _groundsDestroyed;
     private float _groundHeightOffset;
     
-    private const int MaxVisibleClickers = 8;
+    private const int MaxVisibleClickers = 5;
+
+    private readonly Dictionary<string, ClickerMerge> _clickersToMerge = new Dictionary<string, ClickerMerge>();
 
     public GameMaster()
     {
@@ -134,6 +172,7 @@ public class GameMaster : MonoBehaviour
     public UnityAction PlayerBuyAutoClicker(string type)
     {
         RemoveCurrency(Clickers[type].Cost);
+        //var activeNonMergingClickerCount = ActiveAutoclickers.Count - _clickersToMerge.Values.SelectMany(x => x.Clickers).Count() + _clickersToMerge.Count;
 
         if (ActiveAutoclickers.Count >= MaxVisibleClickers)
         {
@@ -141,7 +180,7 @@ public class GameMaster : MonoBehaviour
 
             var clickerTypeWithLargestNumberOfVisible = ActiveAutoclickers
                 .GroupBy(x => x.ClickerType.Name)
-                .OrderByDescending(x => x.Count())
+                .OrderByDescending(x => x.Count() - GetAlreadyMergingClickers(x.Key).Count)
                 .First();
 
             if (alreadyExistOfSameType.Count() != 0 && clickerTypeWithLargestNumberOfVisible.Key == type)
@@ -152,19 +191,87 @@ public class GameMaster : MonoBehaviour
             {
                 if(clickerTypeWithLargestNumberOfVisible.Count() > 1)
                 {
-                    MergeAndDestroyExistingClicker(clickerTypeWithLargestNumberOfVisible);
+                    MergeExistingClickers(clickerTypeWithLargestNumberOfVisible);
                 }
 
-                SpawnClicker(type);
+                SpawnClicker(type, Random.insideUnitCircle * 2);
             }
         }
         else
         {
-            SpawnClicker(type);
+            SpawnClicker(type, Random.insideUnitCircle*2);
         }
 
         return null;
     }
+
+    private void MergeExistingClickers(IGrouping<string, ClickGenerator> clickerTypeWithLargestNumberOfVisible)
+    {
+        var typeName = clickerTypeWithLargestNumberOfVisible.Key;
+
+        var clickersWithLeastStacked = clickerTypeWithLargestNumberOfVisible
+            .Except(GetAlreadyMergingClickers(typeName))
+            .OrderBy(x => x.StackedClickers)
+            .Take(2)
+            .ToList();
+
+        if (_clickersToMerge.ContainsKey(typeName))
+        {
+            var clickerMerge = _clickersToMerge[typeName];
+            clickerMerge.AddClickers(clickersWithLeastStacked);
+        }
+        else
+        {
+            _clickersToMerge.Add(typeName, new ClickerMerge(typeName, clickersWithLeastStacked));
+        }
+
+        //var existingToMerge = clickersWithLeastStacked
+        //    .Skip(1)
+        //    .First();
+
+        //clickersWithLeastStacked
+        //    .First()
+        //    .MergeExistingClicker(
+        //        existingToMerge);
+
+        //DestroyClicker(existingToMerge);
+    }
+
+    private List<ClickGenerator> GetAlreadyMergingClickers(string type)
+    {
+        return _clickersToMerge.ContainsKey(type) ? _clickersToMerge[type].Clickers : new List<ClickGenerator>();
+    }
+
+    private static void StackOntoExisting(List<ClickGenerator> existingClickersOfSameType)
+    {
+        existingClickersOfSameType
+            .OrderBy(x => x.StackedClickers)
+            .First()
+            .MergeNewClicker();
+    }
+
+    private void SpawnClicker(string type, Vector3 position = new Vector3(), int stackedClickers = 1)
+    {
+        var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
+        clickGenerator.Initialize(this, Clickers[type].CloneWithRandom());
+        clickGenerator.transform.position = position.SetY(GroundLevel);
+        clickGenerator.StackedClickers = stackedClickers;
+        ActiveAutoclickers.Add(clickGenerator);
+    }
+
+    public void FinishMerge(ClickerMerge clickerMerge)
+    {
+        SpawnClicker(clickerMerge.Type, clickerMerge.CenterPoint, clickerMerge.Clickers.Sum(x => x.StackedClickers));
+        clickerMerge.Clickers.ForEach(DestroyClicker);
+        _clickersToMerge.Remove(clickerMerge.Type);
+    }
+
+    private void DestroyClicker(ClickGenerator existingToMerge)
+    {
+        ActiveAutoclickers.Remove(existingToMerge);
+        DestroyImmediate(existingToMerge.gameObject);
+    }
+
     public UnityAction PlayerBuyUpgrade(string type)
     {
         var nameAndUpgradeTypeArray = type.Split(' ');
@@ -195,47 +302,6 @@ public class GameMaster : MonoBehaviour
         }
         
         return null;
-    }
-
-    private void MergeAndDestroyExistingClicker(IGrouping<string, ClickGenerator> clickerTypeWithLargestNumberOfVisible)
-    {
-        var clickersWithLeastStacked = clickerTypeWithLargestNumberOfVisible
-            .OrderBy(x => x.StackedClickers)
-            .Take(2)
-            .ToList();
-
-        var existingToMerge = clickersWithLeastStacked
-            .Skip(1)
-            .First();
-
-        clickersWithLeastStacked
-            .First()
-            .MergeExistingClicker(
-                existingToMerge);
-
-        DestroyClicker(existingToMerge);
-    }
-
-    private static void StackOntoExisting(List<ClickGenerator> existingClickersOfSameType)
-    {
-        existingClickersOfSameType
-            .OrderBy(x => x.StackedClickers)
-            .First()
-            .MergeNewClicker();
-    }
-
-    private void SpawnClicker(string type)
-    {
-        var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
-        clickGenerator.Initialize(this, Clickers[type].CloneWithRandom());
-        clickGenerator.transform.position = new Vector3(0, GroundLevel);
-        ActiveAutoclickers.Add(clickGenerator);
-    }
-
-    private void DestroyClicker(ClickGenerator existingToMerge)
-    {
-        ActiveAutoclickers.Remove(existingToMerge);
-        Destroy(existingToMerge.gameObject);
     }
 
     public void GroundDestroyed(Clickable clickable)

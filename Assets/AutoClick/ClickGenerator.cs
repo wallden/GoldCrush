@@ -1,21 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ClickGenerator : MonoBehaviour
 {
     public Animator Animator;
     public Transform View;
     public ClickerType ClickerType { get; private set; }
-    public int StackedClickers { get; private set; }
+    public int StackedClickers;
 
     private float _elapsedTime;
     private GameMaster _gameMaster;
     private Vector3 _moveDirection;
     private CharacterState _characterState;
+    private CharacterState _previousState;
     private float _groundLevel;
     private Vector3 _screenBounds;
 
     private ParticleSystem _particleSystem;
+    private ClickerMerge _clickerMerge;
 
     private const float FallSpeed = 1.5f;
     private const float ScreenPadding = 0.9f;
@@ -24,7 +25,8 @@ public class ClickGenerator : MonoBehaviour
     {
         Walking,
         Mining,
-        Falling
+        Falling,
+        Merging
     }
 
     public void Initialize(GameMaster gameMaster, ClickerType clickerType)
@@ -47,7 +49,7 @@ public class ClickGenerator : MonoBehaviour
 
         if (_characterState == CharacterState.Walking)
 	    {
-            MoveToTarget();
+            MoveToTarget(transform.position + _moveDirection);
 
             if (_elapsedTime > ClickerType.MoveTime)
             {
@@ -75,6 +77,15 @@ public class ClickGenerator : MonoBehaviour
             }
         }
 
+        if (_characterState == CharacterState.Merging)
+        {
+            MoveToTarget(_clickerMerge.CenterPoint);
+            if (transform.position == _clickerMerge.CenterPoint)
+            {
+                _gameMaster.FinishMerge(_clickerMerge);
+            }
+        }
+
 	    _elapsedTime += Time.deltaTime;
 	}
 
@@ -86,12 +97,13 @@ public class ClickGenerator : MonoBehaviour
     private void EndFall()
     {
         Animator.SetBool("IsFalling", false);
-        SetCharacterState(CharacterState.Walking);
+        SetCharacterState(_previousState);
         SetNewMoveDirection();
     }
 
     private void SetCharacterState(CharacterState newState)
     {
+        _previousState = _characterState;
         _characterState = newState;
         Animator.SetBool("IsMining", _characterState == CharacterState.Mining);
         Animator.SetBool("IsFalling", _characterState == CharacterState.Falling);
@@ -103,13 +115,15 @@ public class ClickGenerator : MonoBehaviour
         _gameMaster.MineCurrentGround(ClickerType.Income*StackedClickers);
     }
 
-    private void MoveToTarget()
+    private void MoveToTarget(Vector3 target)
     {
         FlipMoveDirectionIfAtScreenEdge();
 
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + _moveDirection, Time.deltaTime*ClickerType.MoveSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime*ClickerType.MoveSpeed*0.2f);
         var absoluteXScale = Mathf.Abs(View.localScale.x);
-        View.localScale = View.localScale.SetX(_moveDirection.x >= 0 ? absoluteXScale : -absoluteXScale);
+
+        var moveDirection = target - transform.position;
+        View.localScale = View.localScale.SetX(moveDirection.x >= 0 ? absoluteXScale : -absoluteXScale);
     }
 
     private void FlipMoveDirectionIfAtScreenEdge()
@@ -139,5 +153,11 @@ public class ClickGenerator : MonoBehaviour
     public void MergeExistingClicker(ClickGenerator existingClicker)
     {
         StackedClickers += existingClicker.StackedClickers;
+    }
+
+    public void Merge(ClickerMerge clickerMerge)
+    {
+        _clickerMerge = clickerMerge;
+        SetCharacterState(CharacterState.Merging);
     }
 }
