@@ -60,7 +60,9 @@ public class GameMaster : MonoBehaviour
 
     public static int MoneyPerClick = 1;
     public static int IncomeUpgradeValue = 2;
-    public static float MoveAndDigUpgradeValue = 1.3f;
+    public static float MoveAndDigUpgradeValue = 1.2f;
+    private const float ClickerCostIncrease = 1.2f;
+    private const float UpgradeCostIncrease = 1.3f;
 
     private Dictionary<string, ClickerType> Clickers { get; set; }
     public Dictionary<string, UpgradeType> Upgrades { get; set; }
@@ -170,7 +172,13 @@ public class GameMaster : MonoBehaviour
 
     public UnityAction PlayerBuyAutoClicker(string type)
     {
+        if (!CanAfford(Clickers[type].Cost))
+        {
+            return null;
+        }
+
         RemoveCurrency(Clickers[type].Cost);
+        Clickers[type].Cost = (int)(Clickers[type].Cost * ClickerCostIncrease);
 
         if (ActiveAutoclickers.Count >= MaxVisibleClickers)
         {
@@ -261,8 +269,14 @@ public class GameMaster : MonoBehaviour
 
     public UnityAction PlayerBuyUpgrade(string type)
     {
+        if (!CanAfford(Upgrades[type].Cost))
+        {
+            return null;
+        }
+
         var nameAndUpgradeTypeArray = type.Split(' ');
         RemoveCurrency(Upgrades[type].Cost);
+        Upgrades[type].Cost = (int)(Upgrades[type].Cost * UpgradeCostIncrease);
 
         switch (nameAndUpgradeTypeArray[1])
         {
@@ -289,6 +303,11 @@ public class GameMaster : MonoBehaviour
         }
         
         return null;
+    }
+
+    private bool CanAfford(int cost)
+    {
+        return cost < CurrentMoney;
     }
 
     public void GroundDestroyed(Clickable clickable)
