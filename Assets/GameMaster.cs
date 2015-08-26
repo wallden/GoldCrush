@@ -118,10 +118,9 @@ public class GameMaster : MonoBehaviour
                 AddUpgradeButtonToMenu(upgradeToUnlock.Value);
             }
         }
-
-
     }
-    private float GroundLevel
+
+    public float Depth
     {
         get
         {
@@ -242,7 +241,7 @@ public class GameMaster : MonoBehaviour
     {
         var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
         clickGenerator.Initialize(this, Clickers[type].CloneWithRandom());
-        clickGenerator.transform.position = position.SetY(GroundLevel);
+        clickGenerator.transform.position = position.SetY(Depth);
         clickGenerator.StackedClickers = stackedClickers;
         ActiveAutoclickers.Add(clickGenerator);
     }
@@ -299,11 +298,11 @@ public class GameMaster : MonoBehaviour
         _groundsDestroyed++;
         if (_groundsDestroyed % 3 == 0)
         {
-            CameraFocusPoint.transform.position = CameraFocusPoint.transform.position.SetY(0) + new Vector3(0, GroundLevel) - FocusPointOffset;
+            CameraFocusPoint.transform.position = CameraFocusPoint.transform.position.SetY(0) + new Vector3(0, Depth) - FocusPointOffset;
         }
 
         GenerateGround();
-        ActiveAutoclickers.ForEach(x => x.GroundRemoved(GroundLevel));
+        ActiveAutoclickers.ForEach(x => x.GroundRemoved(Depth));
     }
 
     public void MineCurrentGround(int amountMined)
@@ -312,6 +311,12 @@ public class GameMaster : MonoBehaviour
         CurrentGround.RemoveHp(amountMined);
         SetCurrency();
         Player.CurrentExperiencePoints += 100;
+    }
+
+    [ContextMenu("Give Money")]
+    private void GiveCurrency()
+    {
+        CurrentMoney += 500000;
     }
 
     public void RemoveCurrency(int amount)

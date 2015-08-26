@@ -2,11 +2,15 @@
 
 public class BackgroundSpawner : MonoBehaviour
 {
+    public GameMaster GameMaster;
     public GameObject BackgroundPrefab;
     public Transform FocusPoint;
 
-    private int _levelCount;
-    private float _levelHeight;
+    public float LevelSwitchRatio = 50;
+
+    private int _spawnedCount;
+    private float _backgroundHeight;
+    private readonly int _maxVariations = 3;
 
     public void Start ()
     {
@@ -15,7 +19,7 @@ public class BackgroundSpawner : MonoBehaviour
 
     public void Update()
     {
-        var visibilityHeight = (_levelCount - 1)*_levelHeight;
+        var visibilityHeight = (_spawnedCount - 1)*_backgroundHeight;
         if (Mathf.Abs(FocusPoint.position.y) > visibilityHeight)
         {
             AddNextLevelBackground();
@@ -24,14 +28,15 @@ public class BackgroundSpawner : MonoBehaviour
 
     private void AddNextLevelBackground()
     {
-        var sprite = Resources.Load<Sprite>("Backgrounds/Level" + (_levelCount + 1));
-        _levelHeight = sprite.bounds.size.y;
+        var currentLevel = (int)Mathf.Abs(GameMaster.Depth) / (int)LevelSwitchRatio;
+        var sprite = Resources.Load<Sprite>(string.Format("Backgrounds/Level{0}_{1}", currentLevel + 1, Random.Range(1, _maxVariations+1)));
+        _backgroundHeight = sprite.bounds.size.y;
 
-        var position = new Vector3(0, -_levelCount * _levelHeight);
+        var position = new Vector3(0, -_spawnedCount * _backgroundHeight);
         var background = (GameObject)Instantiate(BackgroundPrefab, position, new Quaternion());
         background.GetComponent<SpriteRenderer>().sprite = sprite;
         background.transform.SetParent(transform);
 
-        _levelCount += 1;
+        _spawnedCount += 1;
     }
 }
