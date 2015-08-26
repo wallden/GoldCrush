@@ -1279,8 +1279,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1fd820acaead0449da76dab6e6c4b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameMaster: {fileID: 915063701}
   BackgroundPrefab: {fileID: 179212, guid: 33e57384c8d68734e86597ee70209448, type: 2}
   FocusPoint: {fileID: 540065173}
+  LevelSwitchRatio: 50
 --- !u!1001 &531430411
 Prefab:
   m_ObjectHideFlags: 0
