@@ -60,7 +60,9 @@ public class GameMaster : MonoBehaviour
 
     public static int MoneyPerClick = 1;
     public static int IncomeUpgradeValue = 2;
-    public static float MoveAndDigUpgradeValue = 1.3f;
+    public static float MoveAndDigUpgradeValue = 1.2f;
+    private const float ClickerCostIncrease = 1.2f;
+    private const float UpgradeCostIncrease = 1.3f;
 
     private Dictionary<string, ClickerType> Clickers { get; set; }
     public Dictionary<string, UpgradeType> Upgrades { get; set; }
@@ -118,10 +120,9 @@ public class GameMaster : MonoBehaviour
                 AddUpgradeButtonToMenu(upgradeToUnlock.Value);
             }
         }
-
-
     }
-    private float GroundLevel
+
+    public float Depth
     {
         get
         {
@@ -171,7 +172,13 @@ public class GameMaster : MonoBehaviour
 
     public UnityAction PlayerBuyAutoClicker(string type)
     {
+        if (!CanAfford(Clickers[type].Cost))
+        {
+            return null;
+        }
+
         RemoveCurrency(Clickers[type].Cost);
+        Clickers[type].Cost = (int)(Clickers[type].Cost * ClickerCostIncrease);
 
         if (ActiveAutoclickers.Count >= MaxVisibleClickers)
         {
@@ -242,7 +249,7 @@ public class GameMaster : MonoBehaviour
     {
         var clickGenerator = Instantiate(AutoClickerTemplate).GetComponent<ClickGenerator>();
         clickGenerator.Initialize(this, Clickers[type].CloneWithRandom());
-        clickGenerator.transform.position = position.SetY(GroundLevel);
+        clickGenerator.transform.position = position.SetY(Depth);
         clickGenerator.StackedClickers = stackedClickers;
         ActiveAutoclickers.Add(clickGenerator);
     }
@@ -262,8 +269,14 @@ public class GameMaster : MonoBehaviour
 
     public UnityAction PlayerBuyUpgrade(string type)
     {
+        if (!CanAfford(Upgrades[type].Cost))
+        {
+            return null;
+        }
+
         var nameAndUpgradeTypeArray = type.Split(' ');
         RemoveCurrency(Upgrades[type].Cost);
+        Upgrades[type].Cost = (int)(Upgrades[type].Cost * UpgradeCostIncrease);
 
         switch (nameAndUpgradeTypeArray[1])
         {
@@ -292,6 +305,11 @@ public class GameMaster : MonoBehaviour
         return null;
     }
 
+    private bool CanAfford(int cost)
+    {
+        return cost < CurrentMoney;
+    }
+
     public void GroundDestroyed(Clickable clickable)
     {
         GroundBlocks.Remove(clickable);
@@ -299,11 +317,11 @@ public class GameMaster : MonoBehaviour
         _groundsDestroyed++;
         if (_groundsDestroyed % 3 == 0)
         {
-            CameraFocusPoint.transform.position = CameraFocusPoint.transform.position.SetY(0) + new Vector3(0, GroundLevel) - FocusPointOffset;
+            CameraFocusPoint.transform.position = CameraFocusPoint.transform.position.SetY(0) + new Vector3(0, Depth) - FocusPointOffset;
         }
 
         GenerateGround();
-        ActiveAutoclickers.ForEach(x => x.GroundRemoved(GroundLevel));
+        ActiveAutoclickers.ForEach(x => x.GroundRemoved(Depth));
     }
 
     public void MineCurrentGround(int amountMined)
@@ -312,6 +330,12 @@ public class GameMaster : MonoBehaviour
         CurrentGround.RemoveHp(amountMined);
         SetCurrency();
         Player.CurrentExperiencePoints += 100;
+    }
+
+    [ContextMenu("Give Money")]
+    private void GiveCurrency()
+    {
+        CurrentMoney += 500000;
     }
 
     public void RemoveCurrency(int amount)
