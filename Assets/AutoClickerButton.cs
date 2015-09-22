@@ -32,7 +32,7 @@ public class AutoClickerButton : MonoBehaviour
 
     private void SetButtonTextToCost(ClickerType type)
     {
-        gameObject.GetComponent<Button>().GetComponentInChildren<Text>().text = "$" + type.Cost;
+        gameObject.GetComponent<Button>().GetComponentInChildren<Text>().text = type.Cost.ToString();
     }
 
     private void SetSillhouette()

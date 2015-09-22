@@ -28,13 +28,23 @@ public class BackgroundSpawner : MonoBehaviour
 
     private void AddNextLevelBackground()
     {
+        Sprite backGroundSprite;
         var currentLevel = (int)Mathf.Abs(GameMaster.Depth) / (int)LevelSwitchRatio;
-        var sprite = Resources.Load<Sprite>(string.Format("Backgrounds/Level{0}_{1}", currentLevel + 1, Random.Range(1, _maxVariations+1)));
-        _backgroundHeight = sprite.bounds.size.y;
+        if (currentLevel == 0)
+        {
+            backGroundSprite = Resources.Load<Sprite>("Backgrounds/Level0");
 
-        var position = new Vector3(0, -_spawnedCount * _backgroundHeight);
+        }
+        else
+        {
+            backGroundSprite = Resources.Load<Sprite>(string.Format("Backgrounds/Level{0}_{1}", currentLevel + 1, Random.Range(1, _maxVariations + 1)));
+
+        }
+        _backgroundHeight = backGroundSprite.bounds.size.y;
+
+        var position = new Vector3(0, (-_spawnedCount * _backgroundHeight)+1.4f);
         var background = (GameObject)Instantiate(BackgroundPrefab, position, new Quaternion());
-        background.GetComponent<SpriteRenderer>().sprite = sprite;
+        background.GetComponent<SpriteRenderer>().sprite = backGroundSprite;
         background.transform.SetParent(transform);
 
         _spawnedCount += 1;

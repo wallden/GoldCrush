@@ -90,10 +90,10 @@ public class GameMaster : MonoBehaviour
         Upgrades = new Dictionary<string, UpgradeType>
             {
                 { "Grandma IncomeUpgrade", new UpgradeType { Name = "Grandma IncomeUpgrade", Cost = 10, UnlocksAtPlayerLevel = 1}},
-                { "Grandma MoveAndDigUpgrade", new UpgradeType { Name = "Grandma MoveAndDigUpgrade", Cost = 10, UnlocksAtPlayerLevel = 1}},
-                { "Worker IncomeUpgrade", new UpgradeType { Name = "Worker IncomeUpgrade", Cost = 20, UnlocksAtPlayerLevel = 1 } },
-                { "Worker MoveAndDigUpgrade", new UpgradeType { Name = "Worker MoveAndDigUpgrade", Cost = 20, UnlocksAtPlayerLevel = 1 } },
-                { "MouseClick ClickUpgrade", new UpgradeType { Name = "MouseClick ClickUpgrade", Cost = 20, UnlocksAtPlayerLevel = 1 } },
+                { "Grandma MoveAndDigUpgrade", new UpgradeType { Name = "Grandma MoveAndDigUpgrade", Cost = 10, UnlocksAtPlayerLevel = 5}},
+                { "Worker IncomeUpgrade", new UpgradeType { Name = "Worker IncomeUpgrade", Cost = 20, UnlocksAtPlayerLevel = 10 } },
+                { "Worker MoveAndDigUpgrade", new UpgradeType { Name = "Worker MoveAndDigUpgrade", Cost = 20, UnlocksAtPlayerLevel = 15 } },
+                { "MouseClick ClickUpgrade", new UpgradeType { Name = "MouseClick ClickUpgrade", Cost = 20, UnlocksAtPlayerLevel = 25 } },
             };
         ActiveAutoclickers = new List<ClickGenerator>();
         GroundBlocks = new List<Clickable>();
@@ -337,6 +337,8 @@ public class GameMaster : MonoBehaviour
     {
         CurrentMoney += 500000;
     }
+ 
+
 
     public void RemoveCurrency(int amount)
     {
@@ -346,7 +348,7 @@ public class GameMaster : MonoBehaviour
 
     private void SetCurrency()
     {
-        Text.text = "$" + CurrentMoney;
+        Text.text = CurrentMoney.ToString();
     }
 
     private void AddAutoClickerButtonToMenu(ClickerType type)

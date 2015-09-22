@@ -18,7 +18,7 @@ public class Player : MonoBehaviour {
 	void Start () {
         PlayerLevel = 1;
         ExperienceRequiredToLevel = 1000;
-        CurrentLevelText.text = "Level: "+ PlayerLevel;
+        CurrentLevelText.text = PlayerLevel.ToString();
 	}
 	
 	
@@ -32,11 +32,20 @@ public class Player : MonoBehaviour {
     public void LevelUp()
     {
         PlayerLevel += 1;
-        CurrentLevelText.text = "Level: " + PlayerLevel;
+        CurrentLevelText.text = PlayerLevel.ToString();
 
         CalculateNewLevelExperience();
         CurrentExperiencePoints = 0;
         ExperienceBar.fillAmount = 0;
+    }
+
+    [ContextMenu("Add 5 levels")]
+    private void AddLevels()
+    {
+        for (int i = 0; i <= 5; i++)
+        {
+            LevelUp();
+        }
     }
 
     public void CalculateNewLevelExperience()
