@@ -283,6 +283,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 9535182}
   View: {fileID: 467836}
+  StackedClickers: 0
+  FinishedMiningEffect: {fileID: 194342, guid: ec954a56e6062f34da022512256ec6d3, type: 2}
 --- !u!114 &11446584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1461,6 +1463,10 @@ Prefab:
       propertyPath: InitialModule.startLifetime.scalar
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FinishedMiningEffect
+      value: 
+      objectReference: {fileID: 194342, guid: ec954a56e6062f34da022512256ec6d3, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 173258}

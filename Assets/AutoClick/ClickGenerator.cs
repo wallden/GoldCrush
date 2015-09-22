@@ -115,7 +115,7 @@ public class ClickGenerator : MonoBehaviour
     {
         var amountMined = ClickerType.Income*StackedClickers;
         var incomeMineEffect = (GameObject)Instantiate(FinishedMiningEffect, transform.position + Vector3.up*0.5f, Quaternion.identity);
-        incomeMineEffect.GetComponent<TextMesh>().text = "+" + amountMined + "$";
+        incomeMineEffect.GetComponentInChildren<TextMesh>().text = "+" + amountMined + "$";
         _gameMaster.MineCurrentGround(amountMined);
     }
 
