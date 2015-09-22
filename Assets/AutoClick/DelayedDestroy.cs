@@ -6,6 +6,6 @@ public class DelayedDestroy : MonoBehaviour
 
 	void Start ()
     {
-        Object.Destroy(gameObject, Delay);
+        Destroy(gameObject, Delay);
 	}
 }

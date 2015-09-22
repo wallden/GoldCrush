@@ -6,7 +6,6 @@ public class ClickGenerator : MonoBehaviour
     public Transform View;
     public ClickerType ClickerType { get; private set; }
     public int StackedClickers;
-    public GameObject FinishedMiningEffect;
 
     private float _elapsedTime;
     private GameMaster _gameMaster;
@@ -114,8 +113,7 @@ public class ClickGenerator : MonoBehaviour
     private void FinishMining()
     {
         var amountMined = ClickerType.Income*StackedClickers;
-        var incomeMineEffect = (GameObject)Instantiate(FinishedMiningEffect, transform.position + Vector3.up*0.5f, Quaternion.identity);
-        incomeMineEffect.GetComponentInChildren<TextMesh>().text = "+" + amountMined + "$";
+        TextEffectFactory.CreateFlyUpAndFade("+" + amountMined + "$", transform.position + Vector3.up * 0.5f);
         _gameMaster.MineCurrentGround(amountMined);
     }
 
